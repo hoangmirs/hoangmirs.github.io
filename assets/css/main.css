@@ -751,7 +751,7 @@ img {
 }
 
 a {
-  color: #15F3A8;
+  color: #2ECC71;
   text-decoration: none;
 }
 a:hover {
@@ -760,7 +760,7 @@ a:hover {
 }
 
 blockquote {
-  border-left: 5px solid #15F3A8;
+  border-left: 5px solid #2ECC71;
   padding-left: 1.1rem;
   margin-left: 1.2rem;
   font-style: italic;
@@ -823,7 +823,7 @@ pre code {
 .sidebar-menu .menu-links:hover {
   -webkit-transform: translateY(3px);
           transform: translateY(3px);
-  background-color: #15F3A8;
+  background-color: #2ECC71;
   color: #515151;
 }
 
@@ -847,7 +847,7 @@ pre code {
 
 .sidebar-logo .logo {
   font-family: 'Finger Paint', cursive;
-  color: #15F3A8;
+  color: #2ECC71;
   text-transform: uppercase;
   text-decoration: none;
   font-size: 3rem;
@@ -901,12 +901,12 @@ pre code {
   margin-bottom: 0;
   -webkit-transition: all .3s;
   transition: all .3s;
-  color: #15F3A8;
+  color: #2ECC71;
   font-size: 2.5rem;
   margin-top: 0.67rem;
 }
 .main-article .title-article a, .main-article .page-title a, .main-article .post-title a, .page-article .title-article a, .page-article .page-title a, .page-article .post-title a, .post .title-article a, .post .page-title a, .post .post-title a {
-  color: #15F3A8;
+  color: #2ECC71;
   text-decoration: none;
 }
 .main-article .post-date span, .main-article .page-date span, .page-article .post-date span, .page-article .page-date span, .post .post-date span, .post .page-date span {
@@ -939,7 +939,7 @@ img.post-image, img.page-img {
   text-transform: uppercase;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
   text-decoration: none;
-  background: #15F3A8;
+  background: #2ECC71;
   -webkit-transition: all .35s;
   transition: all .35s;
 }
@@ -996,7 +996,7 @@ img.post-image, img.page-img {
   text-transform: uppercase;
   padding: 1rem 1.5rem;
   color: #fff;
-  background: #15F3A8;
+  background: #2ECC71;
   border: 0;
   border-radius: 0;
   outline: 0;

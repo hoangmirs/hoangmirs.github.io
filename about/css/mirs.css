@@ -1,0 +1,621 @@
+* {
+    font-family: 'Raleway', sans-serif;
+}
+
+h1, h2, h3, h4, h5 {
+    text-transform: uppercase;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+}
+
+.color.turquoise {
+    background: #1ABC9C;
+}
+.color.green-sea {
+    background: #16A085;
+}
+.color.emerland {
+    background: #2ECC71;
+}
+.color.nephritis {
+    background: #27AE60;
+}
+.color.peter-river {
+    background: #3498DB;
+}
+.color.belize-hole {
+    background: #2980B9;
+}
+.color.amethyst {
+    background: #9B59B6;
+}
+.color.wisteria {
+    background: #8E44AD;
+}
+.color.wet-asphalt {
+    background: #34495E;
+}
+.color.midnight-blue {
+    background: #2C3E50;
+}
+.color.sun-flower {
+    background: #F1C40F;
+}
+.color.orange {
+    background: #F39C12;
+}
+.color.carrot {
+    background: #E67E22;
+}
+.color.pumpkin {
+    background: #D35400;
+}
+.color.alizarin {
+    background: #E74C3C;
+}
+.color.pomegranate {
+    background: #C0392B;
+}
+.color.clouds {
+    background: #ECF0F1;
+    color: #bdc3c7;
+}
+.color.silver {
+    background: #BDC3C7;
+}
+.color.concrete {
+    background: #95A5A6;
+}
+.color.asbestos {
+    background: #7F8C8D;
+}
+
+.container {
+    text-align: center;
+}
+
+header {
+    ext-align: center;
+    color: #fff;
+    background-attachment: scroll;
+    background-image: url(../img/header-bg.jpg);
+    background-position: center center;
+    background-repeat: none;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+header .intro {
+    height: 500px;
+    text-transform: uppercase;
+}
+
+header .intro h1 {
+    margin-top: 250px;
+    font-size: 5.0em;
+}
+
+header .intro .code-bar {
+    background: url(../img/horbar.png) no-repeat center center;
+    height: 22px; width: 100%;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    background-size: contain;
+    -o-background-size: contain;
+}
+
+#about {
+    padding-bottom: 50px;
+}
+
+#about .container {
+    text-align: center;
+}
+
+#about .container h2 {
+    padding: 50px 50px 25px;
+}
+
+#about .container hr {
+    padding-bottom: 25px;
+}
+
+#about .container img {
+    border-radius: 200px;
+    -moz-border-radius: 200px;
+    -webkit-border-radius: 200px;
+    -o-border-radius: 200px;
+    width: 50%;
+    border: 10px solid #EEE;
+    margin: 0 0 0 30px;
+}
+
+#about .container ul {
+    margin: 0; padding: 0;
+    list-style: none;
+    text-align: left;
+    font-size: 1.2em;
+}
+
+#about .container ul li {
+    margin-bottom: 5px;
+}
+
+#about .container .text {
+    font-size: 1.2em;
+    text-align: justify;
+    padding: 10px;
+}
+
+#about .container .text.gray {
+    color: #999;
+}
+
+#skills {
+    padding-bottom: 50px;
+}
+
+#skills .container {
+    text-align: center;
+}
+
+#skills .container h2 {
+    padding: 50px 50px 25px;
+}
+
+#skills .container hr {
+    padding-bottom: 25px;
+    display: block; height: 1px;
+    border: 0; border-top: 1px solid #ccc;
+    margin: 1em 0;
+}
+
+#skills .container .icon {
+    font-size: 2.2em;
+    width: 80px; height: 80px;
+    text-align: center;
+    line-height: 80px;
+    border-radius: 200px;
+    -moz-border-radius: 200px;
+    -webkit-border-radius: 200px;
+    -o-border-radius: 200px;
+    color: #FFF;
+}
+
+#skills .container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 10px;
+}
+
+#skills .container ul li {
+    display: inline-block;
+    padding: 5px 8px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -o-border-radius: 5px;
+    background: #DDD;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    font-size: 0.9em;
+}
+
+#worke {
+    padding-bottom: 50px;
+}
+
+#worke .container {
+    text-align: center;
+}
+
+#worke .container h2 {
+    padding: 50px 50px 25px;
+}
+
+#worke .timeline {
+    position: relative;
+    padding: 10px;
+    margin: 0;
+    list-style: none;
+}
+
+#worke .timeline::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    height: 90%;
+    width: 4px;
+    background: #ECF0F1;
+    z-index: -1;
+}
+
+#worke .timeline .timeline-item {
+    position: relative;
+    margin-bottom: 50px;
+}
+
+#worke .timeline .timeline-item .icon {
+    width: 120px; height: 120px;
+    border-radius: 200px;
+    -moz-border-radius: 200px;
+    -webkit-border-radius: 200px;
+    -o-border-radius: 200px;
+    border: 10px solid #ECF0F1;
+    font-size: 2.0em; line-height: 58px;
+    margin: 0 auto;
+    background: #FFF;
+    z-index: 99999;
+    overflow: hidden;
+}
+
+#worke .timeline .timeline-item .desc {
+    width: 50%; height: 150px;
+    position: absolute;
+    font-size: 1.2em;
+}
+
+#worke .timeline .timeline-item.left .desc {
+    top: 5px; left: 0;
+    text-align: right;
+    padding-right: 70px;
+}
+
+#worke .timeline .timeline-item.right .desc {
+    top: 5px; left: 50%;
+    text-align: left;
+    padding-left: 80px;
+}
+
+#worke .timeline .timeline-item .desc .title {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #000;
+}
+
+#worke .timeline .timeline-item .desc .pos {
+    color: #666;
+    font-size: 0.9em;
+}
+
+#worke .timeline .timeline-item .desc .time {
+    color: #CCC;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+#worke .timeline .timeline-item.left .desc .time {
+    position: absolute;
+    left: 0; top: 0;
+}
+
+#worke .timeline .timeline-item.right .desc .time {
+    position: absolute;
+    right: 0; top: 0;
+}
+
+#worke .timeline .timeline-item .desc .text {
+    font-size: 0.9em;
+    color: #999;
+}
+
+#worke .timeline .timeline-item .axon {
+    background: url(../img/axon_active_logo.jpg) no-repeat center center;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    background-size: contain;
+    -o-background-size: contain;
+    width: 100%; height: 100%;
+    margin-top: -5px;
+}
+
+#worke .timeline .timeline-item .fpt {
+    background: url(../img/fpt_logo.jpg) no-repeat center center;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    background-size: contain;
+    -o-background-size: contain;
+    width: 100%; height: 100%;
+    margin-top: -5px;
+}
+
+#worke .timeline .timeline-item .gameloft {
+    background: url(../img/gameloft_logo.png) no-repeat center center;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    background-size: contain;
+    -o-background-size: contain;
+    width: 100%; height: 100%;
+    margin-top: -5px;
+}
+
+#worke .timeline .timeline-item .freelance {
+    background: url(../img/freelance_icon.jpg) no-repeat center center;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    background-size: contain;
+    -o-background-size: contain;
+    width: 100%; height: 100%;
+}
+
+#worke .timeline .timeline-item.bottom {
+    padding-top: 80px;
+}
+
+#worke .timeline .timeline-item.bottom .icon {
+    font-size: 3.0em;
+    line-height: 95px;
+    color: #FFF;
+    background: #E74C3C;
+}
+
+#awards {
+    padding-bottom: 50px;
+}
+
+#awards .container {
+    text-align: center;
+}
+
+#awards .container h2 {
+    padding: 50px 50px 25px;
+}
+
+#awards .container ul {
+    margin: 0; padding: 5px;
+    list-style: none;
+}
+
+#awards .container ul li {
+    color: #444;
+}
+
+#awards .container ul b {
+    color: #000;
+}
+
+#education {
+    padding-bottom: 50px;
+}
+
+#education .container {
+    text-align: center;
+}
+
+#education .container h2 {
+    padding: 50px 50px 25px;
+}
+
+#education .right {
+    text-align: right;
+}
+
+#education .left {
+    text-align: left;
+}
+
+#education .container .row {
+    margin-bottom: 20px;
+}
+
+#education .container .icon {
+    border-radius: 200px;
+    -moz-border-radius: 200px;
+    -webkit-border-radius: 200px;
+    -o-border-radius: 200px;
+    width: 50px; height: 50px;
+    border: 8px solid #DDD;
+    text-align: center;
+    line-height: 35px;
+    font-size: 2.0em;
+    display: inline;
+    float: right;
+}
+
+#education .container .title {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+#education .container .time {
+    font-size: 1.5em;
+}
+
+#projects {
+    padding-bottom: 50px;
+}
+
+#projects .container {
+    text-align: center;
+}
+
+#projects .container h2 {
+    padding: 50px 50px 25px;
+}
+
+#projects .project-item {
+    background: #FFF;
+    margin: 5px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -o-border-radius: 5px;
+    overflow: hidden;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+#projects .project-item .title {
+    padding: 10px;
+}
+
+#projects .project-item .title p {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+#projects .project-item .desc {
+    margin: 0;
+    height: 200px; width: 100%;
+    position: relative;
+}
+
+#projects .project-item .desc .tag {
+    position: absolute;
+    top: 0; left: 0;
+    background: #FFF;
+    padding: 5px;
+    border-bottom-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+#projects .project-item.rotate-anim:hover .desc .icon{
+    -ms-transform: rotate(90deg); /* IE 9 */
+    -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+    transform: rotate(90deg);
+    opacity: 1;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+#projects .project-item .desc .icon.rot-90 {
+    -ms-transform: rotate(90deg); /* IE 9 */
+    -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+    transform: rotate(90deg);
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+#projects .project-item.rotate-anim:hover .desc .icon.rot-90 {
+    -ms-transform: rotate(0deg); /* IE 9 */
+    -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */
+    transform: rotate(0deg);
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+#projects .project-item .desc .icon {
+    color: #FFF;
+    font-family: arial, sans-serif;
+    font-size: 3.0em;
+    line-height: 200px;
+    opacity: 0.5;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+#projects .project-item.fade-anim .desc {
+    position: relative;
+    overflow: hidden;
+}
+
+#projects .project-item.fade-anim .desc .icon {
+    opacity: 1;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+#projects .project-item.fade-anim .desc img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+#projects .project-item.fade-anim:hover .desc .icon {
+    opacity: 0;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+#projects .project-item.fade-anim:hover .desc img {
+    opacity: 1;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+#connect {
+    padding-bottom: 50px;
+    height: 450px;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    background: #333 url(../img/map.png) no-repeat center center;
+    color: #FFF;
+}
+
+#connect .container {
+    text-align: center;
+}
+
+#connect .container h2 {
+    padding: 50px 50px 25px;
+}
+
+#connect .container .row ul {
+    list-style: none;
+    margin: 0; padding: 0;
+}
+
+#connect .container .row ul li {
+    display: inline;
+    margin: 10px;
+}
+
+#connect .container .row ul li a {
+    font-size: 2.0em;
+    color: #FFF;
+    border: 1px solid #FFF;
+    width: 60px; height: 60px;
+    display: inline-block;
+    border-radius: 100px;
+    -moz-border-radius: 100px;
+    -webkit-border-radius: 100px;
+    -o-border-radius: 100px;
+    line-height: 60px;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+#connect .container .row ul li a:hover {
+    color: #333;
+    background: #FFF;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+#connect .container .row .button {
+    border: 1px solid #FFF;
+    color: #FFF;
+    text-decoration: none;
+    background: none;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -o-border-radius: 5px;
+    padding: 15px;
+    margin: 30px;
+    text-transform: uppercase;
+    font-size: 1.2em;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+#connect .container .row .button:hover {
+    background: #FFF;
+    color: #333;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+footer {
+    padding: 25px;
+    background: #333;
+    color: #FFF;
+}
