@@ -846,7 +846,7 @@ pre code {
 }
 
 .sidebar-logo .logo {
-  font-family: 'Finger Paint', cursive;
+  font-family: 'Pacifico', cursive;
   color: #2ECC71;
   text-transform: uppercase;
   text-decoration: none;
@@ -897,7 +897,7 @@ pre code {
   padding: 1rem;
 }
 .main-article .title-article, .main-article .page-title, .main-article .post-title, .page-article .title-article, .page-article .page-title, .page-article .post-title, .post .title-article, .post .page-title, .post .post-title {
-  font-family: 'Finger Paint', cursive;
+  font-family: 'Lobster', cursive;
   margin-bottom: 0;
   -webkit-transition: all .3s;
   transition: all .3s;
