@@ -9,17 +9,20 @@ pagination:
   per_page: 10
 ---
 
-{% for note in paginator.posts %}
+
 <article class="main-article">
-  <div class="wrap-content">
-    <header class="header-article">
-      <h2 class="title-article"><a href="{{note.url | prepend: site.baseurl}}">{{note.title}}</a></h2>
-      <div class="note-date"><span>{{note.date | date: '%Y, %b %d'}}</span></div>
-    </header>
-    <p>{{note.description}}</p>
-  </div>
+  {% for note in paginator.posts %}
+    <div class="wrap-content">
+      <header class="page-header">
+        <h2 class="title-article">
+          <a href="{{note.url | prepend: site.baseurl}}">{{note.date | date: '%Y, %b %d'}}</a>
+        </h2>
+      </header>
+      <p>{{note.description}}</p>
+      <div class="page-date"><span class="pull-right">{{note.place}}</span></div>
+    </div>
+  {% endfor %}
 </article>
-{% endfor %}
 
 <div class="pagination">
   {% if paginator.previous_page %}
