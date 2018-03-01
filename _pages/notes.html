@@ -1,21 +1,22 @@
 ---
 layout: default
+title: Notes
+permalink: /notes/
 pagination:
   enabled: true
-  collection: posts
+  collection: notes
+  permalink: '/notes/:num/'
+  per_page: 10
 ---
 
-{% for post in paginator.posts %}
+{% for note in paginator.posts %}
 <article class="main-article">
   <div class="wrap-content">
     <header class="header-article">
-      <h2 class="title-article"><a href="{{post.url | prepend: site.baseurl}}">{{post.title}}</a></h2>
-      <div class="post-date"><span>{{post.date | date: '%Y, %b %d'}}&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+      <h2 class="title-article"><a href="{{note.url | prepend: site.baseurl}}">{{note.title}}</a></h2>
+      <div class="note-date"><span>{{note.date | date: '%Y, %b %d'}}</span></div>
     </header>
-    {% if post.img %}
-       <img class="post-image" src={{ "/assets/img/" | prepend: site.baseurl | append: post.img }} alt="{{post.title}}">
-    {% endif %}
-    <p>{{post.description}} <a class="more" href="{{post.url | prepend: site.baseurl}}">(Read more...)</a></p>
+    <p>{{note.description}}</p>
   </div>
 </article>
 {% endfor %}
