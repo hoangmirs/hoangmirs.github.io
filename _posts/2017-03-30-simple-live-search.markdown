@@ -31,20 +31,20 @@ Nào chúng ta bắt đầu thôi.
 
 ### **2.2. Thêm các gem để hỗ trợ việc cài đặt**
 
-```Ruby
+{% highlight ruby %}
 gem "bootstrap-sass"
 gem "font-awesome-rails"
 // Để tạo các biểu thức search nhanh hơn
 gem "ransack"
 // Tạo dữ liệu ảo để test
 gem "faker"
-```
+{% endhighlight %}
 
 ### **2.3. Thêm Search plugin**
 
  Các bạn hãy copy nội dung dưới đây và tạo ra file "searchbox.js" hoặc tên gì cũng được trong folder "app/assets/javascripts/"
 
-```JavaScript
+{% highlight javascript %}
 // Author: Ryan Heath
 // http://rpheath.com
 // Mirs edited
@@ -154,7 +154,7 @@ gem "faker"
     })
   }
 })(jQuery)
-```
+{% endhighlight %}
 
 Các bạn có thể vào link sau để xem hướng dẫn cách dùng plugin này.
 `https://github.com/hoangmirs/searchbox/`

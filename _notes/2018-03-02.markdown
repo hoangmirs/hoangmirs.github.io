@@ -29,20 +29,20 @@ Nào chúng ta bắt đầu thôi.
 
 ### **2.2. Thêm các gem để hỗ trợ việc cài đặt**
 
-```Ruby
+{% highlight ruby %}
 gem "bootstrap-sass"
 gem "font-awesome-rails"
 // Để tạo các biểu thức search nhanh hơn
 gem "ransack"
 // Tạo dữ liệu ảo để test
 gem "faker"
-```
+{% endhighlight %}
 
 ### **2.3. Thêm Search plugin**
 
  Các bạn hãy copy nội dung dưới đây và tạo ra file "searchbox.js" hoặc tên gì cũng được trong folder "app/assets/javascripts/"
 
-```JavaScript
+{% highlight javascript %}
 // Author: Ryan Heath
 // http://rpheath.com
 // Mirs edited
@@ -152,7 +152,7 @@ gem "faker"
     })
   }
 })(jQuery)
-```
+{% endhighlight %}
 
 Các bạn có thể vào link sau để xem hướng dẫn cách dùng plugin này.
 `https://github.com/hoangmirs/searchbox/`
@@ -167,7 +167,7 @@ Mình tạo 2 models để test, đó là User và Badge tương ứng như dư�
 
 **User**
 
-```Ruby
+{% highlight ruby %}
 class CreateUsers < ActiveRecord::Migration[5.0]
   def change
     create_table :users do |t|
@@ -180,11 +180,11 @@ class CreateUsers < ActiveRecord::Migration[5.0]
     end
   end
 end
-```
+{% endhighlight %}
 
 **Badge**
 
-```Ruby
+{% highlight ruby %}Ruby
 class CreateBadges < ActiveRecord::Migration[5.0]
   def change
     create_table :badges do |t|
@@ -196,13 +196,13 @@ class CreateBadges < ActiveRecord::Migration[5.0]
     end
   end
 end
-```
+{% endhighlight %}
 
 Sau đó chạy Seed như sau để có dữ liệu test:
 
 **Seed**
 
-```Ruby
+{% highlight ruby %}Ruby
 puts "Creating users...."
 10.times do |n|
   fullname = Faker::Name.name
@@ -220,7 +220,7 @@ puts "Creating badges...."
   Badge.create! name: name, image: image, user_id: user_id
 end
 puts "Created badges!"
-```
+{% endhighlight %}
 
 Mình có để sẵn 6 cái hình ở trong thư mục `app/assets/images` nên có phần này:
 `avatar = "/assets/user-#{n%6 + 1}"`.
@@ -231,18 +231,18 @@ Các bạn muốn thì cứ lên mạng kiếm 6 cái hình đặt tên dạng u
 Mình sẽ làm 3 khung tìm kiếm, khung đầu tiên sẽ tìm cả Users lẫn Badges, khung thứ nhìn tìm Users và khung thứ ba tìm Badges.
 File `routes.rb` của mình sẽ có dạng như sau:
 
-```Ruby
+{% highlight ruby %}Ruby
 Rails.application.routes.draw do
   get "search(/:search)", to: "searches#index", as: :search
   resources :badges
   resources :users
 end
-```
+{% endhighlight %}
 
 Tạo `SearchesController` để tìm cả Users lẫn Badges
 **SeachesController**
 
-```Ruby
+{% highlight ruby %}Ruby
 class SearchesController < ApplicationController
   def index
     q = params[:search]
@@ -256,13 +256,13 @@ class SearchesController < ApplicationController
     end
   end
 end
-```
+{% endhighlight %}
 
 Ở đây mình dùng các pattern search của gem Ransack nên có khó hiểu thì tìm hiểu gem này nhé. Mình cũng trả về chung 1 mảng dữ liệu là @items, sau đó sẽ xử lí dưới view sau.
 
 **UsersController**
 
-```Ruby
+{% highlight ruby %}Ruby
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
@@ -346,13 +346,13 @@ class UsersController < ApplicationController
       params.require(:user).permit(:username, :fullname, :email, :avatar)
     end
 end
-```
+{% endhighlight %}
 
 Cái này mình generate scaffold nên nó nhìu như vậy. Tương tự badges cũng thế. Hai cái này mình chỉ sửa lại action index thôi :D
 
 **BadgesController**
 
-```Ruby
+{% highlight ruby %}Ruby
 class BadgesController < ApplicationController
   before_action :set_badge, only: [:show, :edit, :update, :destroy]
 
@@ -436,13 +436,13 @@ class BadgesController < ApplicationController
       params.require(:badge).permit(:name, :image, :user_id)
     end
 end
-```
+{% endhighlight %}
 
 ### **3.3. Tạo views**
 
 Ở file \_header.html.erb mình làm 3 thanh navbar:
 
-```HTML
+{% highlight ruby %}HTML
 <nav class="navbar navbar-default">
   <div class="row">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -531,7 +531,7 @@ end
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-```
+{% endhighlight %}
 
 Ban đầu chỉ định thêm một cái thôi, nhưng nhác quá nên quất cả 3 cái trong này luôn.
 
@@ -539,7 +539,7 @@ Bây giờ ình sẽ làm view kết quả để hiển thị:
 
 Mình tạo folder `app/views/shared` và tạo file `_search.html.erb`. Mục đích là định nghĩa cái view kết quả khi tìm kiếm ở khung tìm kiếm cả Users và Badges.
 
-```HTML
+{% highlight ruby %}HTML
 <% if items.blank? %>
   <li>
     <%= link_to search_path(params[:search]),
@@ -565,7 +565,7 @@ Mình tạo folder `app/views/shared` và tạo file `_search.html.erb`. Mục �
     <% end %>
   </li>
 <% end %>
-```
+{% endhighlight %}
 
 Như khi nãy mình có nói là mình truyền về @items, thì trong này mình sẽ check xem từng từng item đó là gì và hiển thị partial tương ứng.
 
@@ -574,7 +574,7 @@ Tiếp theo sẽ đến tạo partial.
 Mình tạo thêm partial `search_item` cho users bằng cách tạo file `_search_item.html.erb` trong folder `app/views/users`
 **\_search_item.html.erb**
 
-```HTML
+{% highlight ruby %}HTML
 <li class="search-item">
   <%= link_to user do %>
     <div class="col-md-3">
@@ -596,13 +596,13 @@ Mình tạo thêm partial `search_item` cho users bằng cách tạo file `_sear
     <div class="clearfix"></div>
   <% end %>
 </li>
-```
+{% endhighlight %}
 
 Tương tự cho Badges, tạo file `_search_item.html.erb` trong folder `app/views/badges`
 
 **\_search_item.html.erb**
 
-```HTML
+{% highlight ruby %}HTML
 <li class="search-item">
   <%= link_to badge do %>
     <div class="col-xs-12 col-sm-3 col-md-3">
@@ -624,7 +624,7 @@ Tương tự cho Badges, tạo file `_search_item.html.erb` trong folder `app/vi
     <div class="clearfix"></div>
   <% end %>
 </li>
-```
+{% endhighlight %}
 
 Vậy là xong cho view. Tiếp theo chúng ta sẽ thêm vài đoạn JS để nó chạy nào.
 
@@ -636,7 +636,7 @@ Chúng ta sẽ khởi tạo các searchbox bằng cách tạo 1 file js ở `app
 
 **header.js**
 
-```JavaScript
+{% highlight ruby %}JavaScript
 $(document).ready(function() {
   $('#livesearch_input').hsearchbox({
     url: $('#livesearch_form').attr('action'),
@@ -684,7 +684,7 @@ $(document).ready(function() {
     }
   });
 });
-```
+{% endhighlight %}
 
 Phần config này các bạn có thể tìm hiểu thêm ở link `github` của plugin mình gửi ở trên.
 
@@ -694,21 +694,21 @@ Mình có 3 files JS tất cả, tương ứng với 3 action `index` của 3 co
 
 **app/views/searches/index.js.erb**
 
-```Ruby
+{% highlight ruby %}Ruby
 <%= render "shared/search", items: @items %>
-```
+{% endhighlight %}
 
 **app/views/users/index.js.erb**
 
-```Ruby
+{% highlight ruby %}Ruby
 <%= render "shared/search", items: @users %>
-```
+{% endhighlight %}
 
 **app/views/badges/index.js.erb**
 
-```Ruby
+{% highlight ruby %}Ruby
 <%= render "shared/search", items: @badges %>
-```
+{% endhighlight %}
 
 ### **3.5. Bonus thêm css**
 
@@ -716,7 +716,7 @@ Mình có tạo file `app/assets/stylesheets/livesearch.scss` để custom cái 
 
 \*\*livesearch.scss
 
-```SCSS
+{% highlight ruby %}SCSS
 .scrollable-menu {
   height: auto;
   max-height: 500px;
@@ -764,7 +764,7 @@ li.search-item {
   border: none;
   width: 100%;
 }
-```
+{% endhighlight %}
 
 Vậy là xong. Chúng ta đã có bộ 3 khung tìm kiếm ngon lành rồi (chuckle)
 

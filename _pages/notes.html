@@ -2,38 +2,21 @@
 layout: default
 title: Notes
 permalink: /notes/
-pagination:
-  enabled: true
-  collection: notes
-  permalink: '/notes/:num/'
-  per_page: 10
 ---
 
+{% for note in site.notes reversed %}
+<article class="main-article" style="margin-bottom: 0.5rem;box-shadow: 0px 20px 50px -30px rgba(86, 119, 119, 0.68), 0px 5px 20px rgba(0, 0, 0, 0.1);">
+  <div class="wrap-content">
+    <header>
+      <h3 >
+        <a href="{{note.url | prepend: site.baseurl}}">#{{note.date | date: '%Y, %b %d'}}</a>
+        <div class="page-date pull-right">
+          <span>{{note.place}}</span>
+        </div>
+      </h3>
 
-<article class="main-article">
-  {% for note in paginator.posts %}
-    <div class="wrap-content">
-      <header class="page-header">
-        <h2 class="title-article">
-          <a href="{{note.url | prepend: site.baseurl}}">{{note.date | date: '%Y, %b %d'}}</a>
-        </h2>
-      </header>
-      <p>{{note.description}}</p>
-      <div class="page-date"><span class="pull-right">{{note.place}}</span></div>
-    </div>
-  {% endfor %}
+    </header>
+    <p style="text-align: justify">{{note.description}}</p>
+  </div>
 </article>
-
-<div class="pagination">
-  {% if paginator.previous_page %}
-    <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}" class="previous"><i class="fa fa-chevron-left" aria-hidden="true"></i> Previous</a>
-  {% else %}
-    <span class="previous"><i class="fa fa-chevron-left" aria-hidden="true"></i> Previous</span>
-  {% endif %}
-  <span class="page_number ">{{ paginator.page }}/{{ paginator.total_pages }}</span>
-  {% if paginator.next_page %}
-    <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}" class="next">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
-  {% else %}
-    <span class="next ">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></span>
-  {% endif %}
-</div>
+{% endfor %}
