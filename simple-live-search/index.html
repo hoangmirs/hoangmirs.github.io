@@ -58,8 +58,11 @@
   <main role="main">
     <div class="content">
       
-<article class="page-article">
+  <article class="page-article">
   <div class="wrap-content">
+    <div class="pagination" style="display: flex; justify-content: flex-start">
+      <a href="javascript:history.back()" class="previous"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
+    </div>
     <header class="page-header">
       <h1 class="page-title">Tạo livesearch đơn giản trên Rails sử dụng ransack, JavaScript</h1>
       <div class="page-date"><span>2016, Oct 22</span></div>
@@ -92,128 +95,126 @@
 
 <h3 id="22-thêm-các-gem-để-hỗ-trợ-việc-cài-đặt"><strong>2.2. Thêm các gem để hỗ trợ việc cài đặt</strong></h3>
 
-<pre><code class="language-Ruby">gem "bootstrap-sass"
-gem "font-awesome-rails"
-// Để tạo các biểu thức search nhanh hơn
-gem "ransack"
-// Tạo dữ liệu ảo để test
-gem "faker"
-</code></pre>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">gem</span> <span class="s2">"bootstrap-sass"</span>
+<span class="n">gem</span> <span class="s2">"font-awesome-rails"</span>
+<span class="sr">//</span> <span class="err">Để</span> <span class="n">t</span><span class="err">ạ</span><span class="n">o</span> <span class="n">c</span><span class="err">á</span><span class="n">c</span> <span class="n">bi</span><span class="err">ể</span><span class="n">u</span> <span class="n">th</span><span class="err">ứ</span><span class="n">c</span> <span class="n">search</span> <span class="n">nhanh</span> <span class="n">h</span><span class="err">ơ</span><span class="n">n</span>
+<span class="n">gem</span> <span class="s2">"ransack"</span>
+<span class="sr">//</span> <span class="no">T</span><span class="err">ạ</span><span class="n">o</span> <span class="n">d</span><span class="err">ữ</span> <span class="n">li</span><span class="err">ệ</span><span class="n">u</span> <span class="err">ả</span><span class="n">o</span> <span class="err">để</span> <span class="nb">test</span>
+<span class="n">gem</span> <span class="s2">"faker"</span></code></pre></figure>
 
 <h3 id="23-thêm-search-plugin"><strong>2.3. Thêm Search plugin</strong></h3>
 
 <p>Các bạn hãy copy nội dung dưới đây và tạo ra file “searchbox.js” hoặc tên gì cũng được trong folder “app/assets/javascripts/”</p>
 
-<pre><code class="language-JavaScript">// Author: Ryan Heath
-// http://rpheath.com
-// Mirs edited
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// Author: Ryan Heath</span>
+<span class="c1">// http://rpheath.com</span>
+<span class="c1">// Mirs edited</span>
 
-(function($) {
-  function HSearchBox(options){
-    var defaults = {
-      url: '/search',
-      param: 'query',
-      dom_id: '#livesearch_results',
-      delay: 250,
-      minChars: 2,
-      loading_css: '#livesearch_loading',
-      del_id: '#livesearch_del',
-      form_id: '#livesearch_form',
-      dataType: 'text',
-      onInitSearch: function(){},
-      onStartSearch: function(){},
-      onFinishSearch: function(){}u
-    }
+<span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">function</span> <span class="nx">HSearchBox</span><span class="p">(</span><span class="nx">options</span><span class="p">){</span>
+    <span class="kd">var</span> <span class="nx">defaults</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">url</span><span class="p">:</span> <span class="s1">'/search'</span><span class="p">,</span>
+      <span class="na">param</span><span class="p">:</span> <span class="s1">'query'</span><span class="p">,</span>
+      <span class="na">dom_id</span><span class="p">:</span> <span class="s1">'#livesearch_results'</span><span class="p">,</span>
+      <span class="na">delay</span><span class="p">:</span> <span class="mi">250</span><span class="p">,</span>
+      <span class="na">minChars</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="na">loading_css</span><span class="p">:</span> <span class="s1">'#livesearch_loading'</span><span class="p">,</span>
+      <span class="na">del_id</span><span class="p">:</span> <span class="s1">'#livesearch_del'</span><span class="p">,</span>
+      <span class="na">form_id</span><span class="p">:</span> <span class="s1">'#livesearch_form'</span><span class="p">,</span>
+      <span class="na">dataType</span><span class="p">:</span> <span class="s1">'text'</span><span class="p">,</span>
+      <span class="na">onInitSearch</span><span class="p">:</span> <span class="kd">function</span><span class="p">(){},</span>
+      <span class="na">onStartSearch</span><span class="p">:</span> <span class="kd">function</span><span class="p">(){},</span>
+      <span class="na">onFinishSearch</span><span class="p">:</span> <span class="kd">function</span><span class="p">(){}</span><span class="nx">u</span>
+    <span class="p">}</span>
 
-    this.settings = $.extend({}, defaults, options || {})
+    <span class="k">this</span><span class="p">.</span><span class="nx">settings</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">extend</span><span class="p">({},</span> <span class="nx">defaults</span><span class="p">,</span> <span class="nx">options</span> <span class="o">||</span> <span class="p">{})</span>
 
-    this.loading = function() {
-      $(this.settings.loading_css).show()
-    }
+    <span class="k">this</span><span class="p">.</span><span class="nx">loading</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">loading_css</span><span class="p">).</span><span class="nx">show</span><span class="p">()</span>
+    <span class="p">}</span>
 
-    this.idle = function() {
-      $(this.settings.loading_css).hide()
-    }
+    <span class="k">this</span><span class="p">.</span><span class="nx">idle</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">loading_css</span><span class="p">).</span><span class="nx">hide</span><span class="p">()</span>
+    <span class="p">}</span>
 
-    this.start = function() {
-      this.loading()
-      this.settings.onStartSearch()
-    }
+    <span class="k">this</span><span class="p">.</span><span class="nx">start</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">loading</span><span class="p">()</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">onStartSearch</span><span class="p">()</span>
+    <span class="p">}</span>
 
-    this.stop = function() {
-      this.idle()
-      this.settings.onFinishSearch()
-    }
+    <span class="k">this</span><span class="p">.</span><span class="nx">stop</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">idle</span><span class="p">()</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">onFinishSearch</span><span class="p">()</span>
+    <span class="p">}</span>
 
-    this.kill = function() {
-      $(this.settings.dom_id).fadeOut(50)
-      $(this.settings.dom_id).html('')
-      $(this.settings.del_id).fadeOut(100)
-    }
+    <span class="k">this</span><span class="p">.</span><span class="nx">kill</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">dom_id</span><span class="p">).</span><span class="nx">fadeOut</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">dom_id</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
+      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">del_id</span><span class="p">).</span><span class="nx">fadeOut</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+    <span class="p">}</span>
 
-    this.reset = function() {
-      $(this.settings.dom_id).html('')
-      $(this.settings.dom_id).fadeOut(50)
-      $(this.settings.form_id).val('')
-      $(this.settings.del_id).fadeOut(100)
-    }
+    <span class="k">this</span><span class="p">.</span><span class="nx">reset</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">dom_id</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
+      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">dom_id</span><span class="p">).</span><span class="nx">fadeOut</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">form_id</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
+      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">del_id</span><span class="p">).</span><span class="nx">fadeOut</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+    <span class="p">}</span>
 
-    this.resetTimer = function(timer) {
-      if (timer) clearTimeout(timer)
-    }
+    <span class="k">this</span><span class="p">.</span><span class="nx">resetTimer</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">timer</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">timer</span><span class="p">)</span> <span class="nx">clearTimeout</span><span class="p">(</span><span class="nx">timer</span><span class="p">)</span>
+    <span class="p">}</span>
 
-    this.process = function(terms) {
-      var currentSearchBox = this
-      if (/\S/.test(terms)) {
-        $.ajax({
-          type: 'GET',
-          dataType : currentSearchBox.settings.dataType,
-          url: currentSearchBox.settings.url,
-          data: {
-            search: terms.trim()
-          },
-          complete: function(data) {
-            $(currentSearchBox.settings.del_id).fadeIn(50)
-            $(currentSearchBox.settings.dom_id).html(data.responseText)
-            if (!$(currentSearchBox.settings.dom_id).is(':empty')) {
-              $(currentSearchBox.settings.dom_id).fadeIn(100)
-            }
-            currentSearchBox.stop()
-          }
-        })
-        return false
-      } else {
-        currentSearchBox.kill()
-      }
-    }
-  }
+    <span class="k">this</span><span class="p">.</span><span class="nx">process</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">terms</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">currentSearchBox</span> <span class="o">=</span> <span class="k">this</span>
+      <span class="k">if</span> <span class="p">(</span><span class="sr">/</span><span class="se">\S</span><span class="sr">/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">terms</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+          <span class="na">type</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
+          <span class="na">dataType</span> <span class="p">:</span> <span class="nx">currentSearchBox</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">dataType</span><span class="p">,</span>
+          <span class="na">url</span><span class="p">:</span> <span class="nx">currentSearchBox</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">url</span><span class="p">,</span>
+          <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">search</span><span class="p">:</span> <span class="nx">terms</span><span class="p">.</span><span class="nx">trim</span><span class="p">()</span>
+          <span class="p">},</span>
+          <span class="na">complete</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">$</span><span class="p">(</span><span class="nx">currentSearchBox</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">del_id</span><span class="p">).</span><span class="nx">fadeIn</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+            <span class="nx">$</span><span class="p">(</span><span class="nx">currentSearchBox</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">dom_id</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">responseText</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">$</span><span class="p">(</span><span class="nx">currentSearchBox</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">dom_id</span><span class="p">).</span><span class="nx">is</span><span class="p">(</span><span class="s1">':empty'</span><span class="p">))</span> <span class="p">{</span>
+              <span class="nx">$</span><span class="p">(</span><span class="nx">currentSearchBox</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">dom_id</span><span class="p">).</span><span class="nx">fadeIn</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+            <span class="p">}</span>
+            <span class="nx">currentSearchBox</span><span class="p">.</span><span class="nx">stop</span><span class="p">()</span>
+          <span class="p">}</span>
+        <span class="p">})</span>
+        <span class="k">return</span> <span class="kc">false</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">currentSearchBox</span><span class="p">.</span><span class="nx">kill</span><span class="p">()</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
 
-  $.fn.hsearchbox = function(configs) {
-    var hsearchbox = new HSearchBox(configs)
-    hsearchbox.settings.onInitSearch()
-    hsearchbox.idle()
+  <span class="nx">$</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">hsearchbox</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">configs</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">hsearchbox</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HSearchBox</span><span class="p">(</span><span class="nx">configs</span><span class="p">)</span>
+    <span class="nx">hsearchbox</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">onInitSearch</span><span class="p">()</span>
+    <span class="nx">hsearchbox</span><span class="p">.</span><span class="nx">idle</span><span class="p">()</span>
 
-    return this.each(function() {
-      var $input = $(this)
-      $input
-        .keyup(function() {
-          if ($input.val() != this.previousValue) {
-            if (/\S/.test($input.val().trim()) &amp;&amp; $input.val().trim().length &gt; hsearchbox.settings.minChars) {
-              hsearchbox.resetTimer(this.timer)
-              this.timer = setTimeout(function() {
-                hsearchbox.start()
-                hsearchbox.process($input.val())
-              }, hsearchbox.settings.delay)
-            } else {
-              hsearchbox.kill()
-            }
-            this.previousValue = $input.val()
-          }
-        })
-    })
-  }
-})(jQuery)
-</code></pre>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">$input</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+      <span class="nx">$input</span>
+        <span class="p">.</span><span class="nx">keyup</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">$input</span><span class="p">.</span><span class="nx">val</span><span class="p">()</span> <span class="o">!=</span> <span class="k">this</span><span class="p">.</span><span class="nx">previousValue</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="sr">/</span><span class="se">\S</span><span class="sr">/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">$input</span><span class="p">.</span><span class="nx">val</span><span class="p">().</span><span class="nx">trim</span><span class="p">())</span> <span class="o">&amp;&amp;</span> <span class="nx">$input</span><span class="p">.</span><span class="nx">val</span><span class="p">().</span><span class="nx">trim</span><span class="p">().</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="nx">hsearchbox</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">minChars</span><span class="p">)</span> <span class="p">{</span>
+              <span class="nx">hsearchbox</span><span class="p">.</span><span class="nx">resetTimer</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">timer</span><span class="p">)</span>
+              <span class="k">this</span><span class="p">.</span><span class="nx">timer</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                <span class="nx">hsearchbox</span><span class="p">.</span><span class="nx">start</span><span class="p">()</span>
+                <span class="nx">hsearchbox</span><span class="p">.</span><span class="nx">process</span><span class="p">(</span><span class="nx">$input</span><span class="p">.</span><span class="nx">val</span><span class="p">())</span>
+              <span class="p">},</span> <span class="nx">hsearchbox</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">delay</span><span class="p">)</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+              <span class="nx">hsearchbox</span><span class="p">.</span><span class="nx">kill</span><span class="p">()</span>
+            <span class="p">}</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">previousValue</span> <span class="o">=</span> <span class="nx">$input</span><span class="p">.</span><span class="nx">val</span><span class="p">()</span>
+          <span class="p">}</span>
+        <span class="p">})</span>
+    <span class="p">})</span>
+  <span class="p">}</span>
+<span class="p">})(</span><span class="nx">jQuery</span><span class="p">)</span></code></pre></figure>
 
 <p>Các bạn có thể vào link sau để xem hướng dẫn cách dùng plugin này.
 <code class="highlighter-rouge">https://github.com/hoangmirs/searchbox/</code></p>
@@ -853,6 +854,7 @@ li.search-item {
 
   </div>
 </article>
+
 
 
     </div>

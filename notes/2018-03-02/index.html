@@ -58,8 +58,11 @@
   <main role="main">
     <div class="content">
       
-<article class="page-article">
+  <article class="page-article">
   <div class="wrap-content">
+    <div class="pagination" style="display: flex; justify-content: flex-start">
+      <a href="javascript:history.back()" class="previous"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
+    </div>
     <header class="page-header">
       <h1 class="page-title">2018, Mar 01</h1>
       <div class="page-date"><span>Danang, Vietnam</span></div>
@@ -90,128 +93,126 @@
 
 <h3 id="22-thêm-các-gem-để-hỗ-trợ-việc-cài-đặt"><strong>2.2. Thêm các gem để hỗ trợ việc cài đặt</strong></h3>
 
-<pre><code class="language-Ruby">gem "bootstrap-sass"
-gem "font-awesome-rails"
-// Để tạo các biểu thức search nhanh hơn
-gem "ransack"
-// Tạo dữ liệu ảo để test
-gem "faker"
-</code></pre>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">gem</span> <span class="s2">"bootstrap-sass"</span>
+<span class="n">gem</span> <span class="s2">"font-awesome-rails"</span>
+<span class="sr">//</span> <span class="err">Để</span> <span class="n">t</span><span class="err">ạ</span><span class="n">o</span> <span class="n">c</span><span class="err">á</span><span class="n">c</span> <span class="n">bi</span><span class="err">ể</span><span class="n">u</span> <span class="n">th</span><span class="err">ứ</span><span class="n">c</span> <span class="n">search</span> <span class="n">nhanh</span> <span class="n">h</span><span class="err">ơ</span><span class="n">n</span>
+<span class="n">gem</span> <span class="s2">"ransack"</span>
+<span class="sr">//</span> <span class="no">T</span><span class="err">ạ</span><span class="n">o</span> <span class="n">d</span><span class="err">ữ</span> <span class="n">li</span><span class="err">ệ</span><span class="n">u</span> <span class="err">ả</span><span class="n">o</span> <span class="err">để</span> <span class="nb">test</span>
+<span class="n">gem</span> <span class="s2">"faker"</span></code></pre></figure>
 
 <h3 id="23-thêm-search-plugin"><strong>2.3. Thêm Search plugin</strong></h3>
 
 <p>Các bạn hãy copy nội dung dưới đây và tạo ra file “searchbox.js” hoặc tên gì cũng được trong folder “app/assets/javascripts/”</p>
 
-<pre><code class="language-JavaScript">// Author: Ryan Heath
-// http://rpheath.com
-// Mirs edited
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// Author: Ryan Heath</span>
+<span class="c1">// http://rpheath.com</span>
+<span class="c1">// Mirs edited</span>
 
-(function($) {
-  function HSearchBox(options){
-    var defaults = {
-      url: '/search',
-      param: 'query',
-      dom_id: '#livesearch_results',
-      delay: 250,
-      minChars: 2,
-      loading_css: '#livesearch_loading',
-      del_id: '#livesearch_del',
-      form_id: '#livesearch_form',
-      dataType: 'text',
-      onInitSearch: function(){},
-      onStartSearch: function(){},
-      onFinishSearch: function(){}u
-    }
+<span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">function</span> <span class="nx">HSearchBox</span><span class="p">(</span><span class="nx">options</span><span class="p">){</span>
+    <span class="kd">var</span> <span class="nx">defaults</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">url</span><span class="p">:</span> <span class="s1">'/search'</span><span class="p">,</span>
+      <span class="na">param</span><span class="p">:</span> <span class="s1">'query'</span><span class="p">,</span>
+      <span class="na">dom_id</span><span class="p">:</span> <span class="s1">'#livesearch_results'</span><span class="p">,</span>
+      <span class="na">delay</span><span class="p">:</span> <span class="mi">250</span><span class="p">,</span>
+      <span class="na">minChars</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="na">loading_css</span><span class="p">:</span> <span class="s1">'#livesearch_loading'</span><span class="p">,</span>
+      <span class="na">del_id</span><span class="p">:</span> <span class="s1">'#livesearch_del'</span><span class="p">,</span>
+      <span class="na">form_id</span><span class="p">:</span> <span class="s1">'#livesearch_form'</span><span class="p">,</span>
+      <span class="na">dataType</span><span class="p">:</span> <span class="s1">'text'</span><span class="p">,</span>
+      <span class="na">onInitSearch</span><span class="p">:</span> <span class="kd">function</span><span class="p">(){},</span>
+      <span class="na">onStartSearch</span><span class="p">:</span> <span class="kd">function</span><span class="p">(){},</span>
+      <span class="na">onFinishSearch</span><span class="p">:</span> <span class="kd">function</span><span class="p">(){}</span><span class="nx">u</span>
+    <span class="p">}</span>
 
-    this.settings = $.extend({}, defaults, options || {})
+    <span class="k">this</span><span class="p">.</span><span class="nx">settings</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">extend</span><span class="p">({},</span> <span class="nx">defaults</span><span class="p">,</span> <span class="nx">options</span> <span class="o">||</span> <span class="p">{})</span>
 
-    this.loading = function() {
-      $(this.settings.loading_css).show()
-    }
+    <span class="k">this</span><span class="p">.</span><span class="nx">loading</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">loading_css</span><span class="p">).</span><span class="nx">show</span><span class="p">()</span>
+    <span class="p">}</span>
 
-    this.idle = function() {
-      $(this.settings.loading_css).hide()
-    }
+    <span class="k">this</span><span class="p">.</span><span class="nx">idle</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">loading_css</span><span class="p">).</span><span class="nx">hide</span><span class="p">()</span>
+    <span class="p">}</span>
 
-    this.start = function() {
-      this.loading()
-      this.settings.onStartSearch()
-    }
+    <span class="k">this</span><span class="p">.</span><span class="nx">start</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">loading</span><span class="p">()</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">onStartSearch</span><span class="p">()</span>
+    <span class="p">}</span>
 
-    this.stop = function() {
-      this.idle()
-      this.settings.onFinishSearch()
-    }
+    <span class="k">this</span><span class="p">.</span><span class="nx">stop</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">idle</span><span class="p">()</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">onFinishSearch</span><span class="p">()</span>
+    <span class="p">}</span>
 
-    this.kill = function() {
-      $(this.settings.dom_id).fadeOut(50)
-      $(this.settings.dom_id).html('')
-      $(this.settings.del_id).fadeOut(100)
-    }
+    <span class="k">this</span><span class="p">.</span><span class="nx">kill</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">dom_id</span><span class="p">).</span><span class="nx">fadeOut</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">dom_id</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
+      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">del_id</span><span class="p">).</span><span class="nx">fadeOut</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+    <span class="p">}</span>
 
-    this.reset = function() {
-      $(this.settings.dom_id).html('')
-      $(this.settings.dom_id).fadeOut(50)
-      $(this.settings.form_id).val('')
-      $(this.settings.del_id).fadeOut(100)
-    }
+    <span class="k">this</span><span class="p">.</span><span class="nx">reset</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">dom_id</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
+      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">dom_id</span><span class="p">).</span><span class="nx">fadeOut</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">form_id</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
+      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">del_id</span><span class="p">).</span><span class="nx">fadeOut</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+    <span class="p">}</span>
 
-    this.resetTimer = function(timer) {
-      if (timer) clearTimeout(timer)
-    }
+    <span class="k">this</span><span class="p">.</span><span class="nx">resetTimer</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">timer</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">timer</span><span class="p">)</span> <span class="nx">clearTimeout</span><span class="p">(</span><span class="nx">timer</span><span class="p">)</span>
+    <span class="p">}</span>
 
-    this.process = function(terms) {
-      var currentSearchBox = this
-      if (/\S/.test(terms)) {
-        $.ajax({
-          type: 'GET',
-          dataType : currentSearchBox.settings.dataType,
-          url: currentSearchBox.settings.url,
-          data: {
-            search: terms.trim()
-          },
-          complete: function(data) {
-            $(currentSearchBox.settings.del_id).fadeIn(50)
-            $(currentSearchBox.settings.dom_id).html(data.responseText)
-            if (!$(currentSearchBox.settings.dom_id).is(':empty')) {
-              $(currentSearchBox.settings.dom_id).fadeIn(100)
-            }
-            currentSearchBox.stop()
-          }
-        })
-        return false
-      } else {
-        currentSearchBox.kill()
-      }
-    }
-  }
+    <span class="k">this</span><span class="p">.</span><span class="nx">process</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">terms</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">currentSearchBox</span> <span class="o">=</span> <span class="k">this</span>
+      <span class="k">if</span> <span class="p">(</span><span class="sr">/</span><span class="se">\S</span><span class="sr">/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">terms</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+          <span class="na">type</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
+          <span class="na">dataType</span> <span class="p">:</span> <span class="nx">currentSearchBox</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">dataType</span><span class="p">,</span>
+          <span class="na">url</span><span class="p">:</span> <span class="nx">currentSearchBox</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">url</span><span class="p">,</span>
+          <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">search</span><span class="p">:</span> <span class="nx">terms</span><span class="p">.</span><span class="nx">trim</span><span class="p">()</span>
+          <span class="p">},</span>
+          <span class="na">complete</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">$</span><span class="p">(</span><span class="nx">currentSearchBox</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">del_id</span><span class="p">).</span><span class="nx">fadeIn</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+            <span class="nx">$</span><span class="p">(</span><span class="nx">currentSearchBox</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">dom_id</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">responseText</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">$</span><span class="p">(</span><span class="nx">currentSearchBox</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">dom_id</span><span class="p">).</span><span class="nx">is</span><span class="p">(</span><span class="s1">':empty'</span><span class="p">))</span> <span class="p">{</span>
+              <span class="nx">$</span><span class="p">(</span><span class="nx">currentSearchBox</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">dom_id</span><span class="p">).</span><span class="nx">fadeIn</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+            <span class="p">}</span>
+            <span class="nx">currentSearchBox</span><span class="p">.</span><span class="nx">stop</span><span class="p">()</span>
+          <span class="p">}</span>
+        <span class="p">})</span>
+        <span class="k">return</span> <span class="kc">false</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">currentSearchBox</span><span class="p">.</span><span class="nx">kill</span><span class="p">()</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
 
-  $.fn.hsearchbox = function(configs) {
-    var hsearchbox = new HSearchBox(configs)
-    hsearchbox.settings.onInitSearch()
-    hsearchbox.idle()
+  <span class="nx">$</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">hsearchbox</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">configs</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">hsearchbox</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HSearchBox</span><span class="p">(</span><span class="nx">configs</span><span class="p">)</span>
+    <span class="nx">hsearchbox</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">onInitSearch</span><span class="p">()</span>
+    <span class="nx">hsearchbox</span><span class="p">.</span><span class="nx">idle</span><span class="p">()</span>
 
-    return this.each(function() {
-      var $input = $(this)
-      $input
-        .keyup(function() {
-          if ($input.val() != this.previousValue) {
-            if (/\S/.test($input.val().trim()) &amp;&amp; $input.val().trim().length &gt; hsearchbox.settings.minChars) {
-              hsearchbox.resetTimer(this.timer)
-              this.timer = setTimeout(function() {
-                hsearchbox.start()
-                hsearchbox.process($input.val())
-              }, hsearchbox.settings.delay)
-            } else {
-              hsearchbox.kill()
-            }
-            this.previousValue = $input.val()
-          }
-        })
-    })
-  }
-})(jQuery)
-</code></pre>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">$input</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+      <span class="nx">$input</span>
+        <span class="p">.</span><span class="nx">keyup</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">$input</span><span class="p">.</span><span class="nx">val</span><span class="p">()</span> <span class="o">!=</span> <span class="k">this</span><span class="p">.</span><span class="nx">previousValue</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="sr">/</span><span class="se">\S</span><span class="sr">/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">$input</span><span class="p">.</span><span class="nx">val</span><span class="p">().</span><span class="nx">trim</span><span class="p">())</span> <span class="o">&amp;&amp;</span> <span class="nx">$input</span><span class="p">.</span><span class="nx">val</span><span class="p">().</span><span class="nx">trim</span><span class="p">().</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="nx">hsearchbox</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">minChars</span><span class="p">)</span> <span class="p">{</span>
+              <span class="nx">hsearchbox</span><span class="p">.</span><span class="nx">resetTimer</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">timer</span><span class="p">)</span>
+              <span class="k">this</span><span class="p">.</span><span class="nx">timer</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                <span class="nx">hsearchbox</span><span class="p">.</span><span class="nx">start</span><span class="p">()</span>
+                <span class="nx">hsearchbox</span><span class="p">.</span><span class="nx">process</span><span class="p">(</span><span class="nx">$input</span><span class="p">.</span><span class="nx">val</span><span class="p">())</span>
+              <span class="p">},</span> <span class="nx">hsearchbox</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">delay</span><span class="p">)</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+              <span class="nx">hsearchbox</span><span class="p">.</span><span class="nx">kill</span><span class="p">()</span>
+            <span class="p">}</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">previousValue</span> <span class="o">=</span> <span class="nx">$input</span><span class="p">.</span><span class="nx">val</span><span class="p">()</span>
+          <span class="p">}</span>
+        <span class="p">})</span>
+    <span class="p">})</span>
+  <span class="p">}</span>
+<span class="p">})(</span><span class="nx">jQuery</span><span class="p">)</span></code></pre></figure>
 
 <p>Các bạn có thể vào link sau để xem hướng dẫn cách dùng plugin này.
 <code class="highlighter-rouge">https://github.com/hoangmirs/searchbox/</code></p>
@@ -226,57 +227,56 @@ gem "faker"
 
 <p><strong>User</strong></p>
 
-<pre><code class="language-Ruby">class CreateUsers &lt; ActiveRecord::Migration[5.0]
-  def change
-    create_table :users do |t|
-      t.string :username
-      t.string :fullname
-      t.string :email
-      t.string :avatar
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">CreateUsers</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span><span class="p">[</span><span class="mi">5</span><span class="o">.</span><span class="mi">0</span><span class="p">]</span>
+  <span class="k">def</span> <span class="nf">change</span>
+    <span class="n">create_table</span> <span class="ss">:users</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+      <span class="n">t</span><span class="p">.</span><span class="nf">string</span> <span class="ss">:username</span>
+      <span class="n">t</span><span class="p">.</span><span class="nf">string</span> <span class="ss">:fullname</span>
+      <span class="n">t</span><span class="p">.</span><span class="nf">string</span> <span class="ss">:email</span>
+      <span class="n">t</span><span class="p">.</span><span class="nf">string</span> <span class="ss">:avatar</span>
 
-      t.timestamps
-    end
-  end
-end
-</code></pre>
+      <span class="n">t</span><span class="p">.</span><span class="nf">timestamps</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></figure>
 
 <p><strong>Badge</strong></p>
 
-<pre><code class="language-Ruby">class CreateBadges &lt; ActiveRecord::Migration[5.0]
-  def change
-    create_table :badges do |t|
-      t.string :name
-      t.string :image
-      t.references :user, foreign_key: true
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Ruby</span>
+<span class="k">class</span> <span class="nc">CreateBadges</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span><span class="p">[</span><span class="mi">5</span><span class="o">.</span><span class="mi">0</span><span class="p">]</span>
+  <span class="k">def</span> <span class="nf">change</span>
+    <span class="n">create_table</span> <span class="ss">:badges</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+      <span class="n">t</span><span class="p">.</span><span class="nf">string</span> <span class="ss">:name</span>
+      <span class="n">t</span><span class="p">.</span><span class="nf">string</span> <span class="ss">:image</span>
+      <span class="n">t</span><span class="p">.</span><span class="nf">references</span> <span class="ss">:user</span><span class="p">,</span> <span class="ss">foreign_key: </span><span class="kp">true</span>
 
-      t.timestamps
-    end
-  end
-end
-</code></pre>
+      <span class="n">t</span><span class="p">.</span><span class="nf">timestamps</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></figure>
 
 <p>Sau đó chạy Seed như sau để có dữ liệu test:</p>
 
 <p><strong>Seed</strong></p>
 
-<pre><code class="language-Ruby">puts "Creating users...."
-10.times do |n|
-  fullname = Faker::Name.name
-  username = Faker::Internet.user_name
-  email = Faker::Internet.email
-  avatar = "/assets/user-#{n%6 + 1}"
-  User.create! fullname: fullname, username: username, email: email, avatar: avatar
-end
-puts "Created users!"
-puts "Creating badges...."
-10.times do |n|
-  name = Faker::Book.title
-  image = "/assets/user-#{n%6 + 1}"
-  user_id = rand(User.count) + 1
-  Badge.create! name: name, image: image, user_id: user_id
-end
-puts "Created badges!"
-</code></pre>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Ruby</span>
+<span class="nb">puts</span> <span class="s2">"Creating users...."</span>
+<span class="mi">10</span><span class="p">.</span><span class="nf">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span>
+  <span class="n">fullname</span> <span class="o">=</span> <span class="no">Faker</span><span class="o">::</span><span class="no">Name</span><span class="p">.</span><span class="nf">name</span>
+  <span class="n">username</span> <span class="o">=</span> <span class="no">Faker</span><span class="o">::</span><span class="no">Internet</span><span class="p">.</span><span class="nf">user_name</span>
+  <span class="n">email</span> <span class="o">=</span> <span class="no">Faker</span><span class="o">::</span><span class="no">Internet</span><span class="p">.</span><span class="nf">email</span>
+  <span class="n">avatar</span> <span class="o">=</span> <span class="s2">"/assets/user-</span><span class="si">#{</span><span class="n">n</span><span class="o">%</span><span class="mi">6</span> <span class="o">+</span> <span class="mi">1</span><span class="si">}</span><span class="s2">"</span>
+  <span class="no">User</span><span class="p">.</span><span class="nf">create!</span> <span class="ss">fullname: </span><span class="n">fullname</span><span class="p">,</span> <span class="ss">username: </span><span class="n">username</span><span class="p">,</span> <span class="ss">email: </span><span class="n">email</span><span class="p">,</span> <span class="ss">avatar: </span><span class="n">avatar</span>
+<span class="k">end</span>
+<span class="nb">puts</span> <span class="s2">"Created users!"</span>
+<span class="nb">puts</span> <span class="s2">"Creating badges...."</span>
+<span class="mi">10</span><span class="p">.</span><span class="nf">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span>
+  <span class="nb">name</span> <span class="o">=</span> <span class="no">Faker</span><span class="o">::</span><span class="no">Book</span><span class="p">.</span><span class="nf">title</span>
+  <span class="n">image</span> <span class="o">=</span> <span class="s2">"/assets/user-</span><span class="si">#{</span><span class="n">n</span><span class="o">%</span><span class="mi">6</span> <span class="o">+</span> <span class="mi">1</span><span class="si">}</span><span class="s2">"</span>
+  <span class="n">user_id</span> <span class="o">=</span> <span class="nb">rand</span><span class="p">(</span><span class="no">User</span><span class="p">.</span><span class="nf">count</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="no">Badge</span><span class="p">.</span><span class="nf">create!</span> <span class="ss">name: </span><span class="nb">name</span><span class="p">,</span> <span class="ss">image: </span><span class="n">image</span><span class="p">,</span> <span class="ss">user_id: </span><span class="n">user_id</span>
+<span class="k">end</span>
+<span class="nb">puts</span> <span class="s2">"Created badges!"</span></code></pre></figure>
 
 <p>Mình có để sẵn 6 cái hình ở trong thư mục <code class="highlighter-rouge">app/assets/images</code> nên có phần này:
 <code class="highlighter-rouge">avatar = "/assets/user-#{n%6 + 1}"</code>.
@@ -287,248 +287,249 @@ Các bạn muốn thì cứ lên mạng kiếm 6 cái hình đặt tên dạng u
 <p>Mình sẽ làm 3 khung tìm kiếm, khung đầu tiên sẽ tìm cả Users lẫn Badges, khung thứ nhìn tìm Users và khung thứ ba tìm Badges.
 File <code class="highlighter-rouge">routes.rb</code> của mình sẽ có dạng như sau:</p>
 
-<pre><code class="language-Ruby">Rails.application.routes.draw do
-  get "search(/:search)", to: "searches#index", as: :search
-  resources :badges
-  resources :users
-end
-</code></pre>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Ruby</span>
+<span class="no">Rails</span><span class="p">.</span><span class="nf">application</span><span class="p">.</span><span class="nf">routes</span><span class="p">.</span><span class="nf">draw</span> <span class="k">do</span>
+  <span class="n">get</span> <span class="s2">"search(/:search)"</span><span class="p">,</span> <span class="ss">to: </span><span class="s2">"searches#index"</span><span class="p">,</span> <span class="ss">as: :search</span>
+  <span class="n">resources</span> <span class="ss">:badges</span>
+  <span class="n">resources</span> <span class="ss">:users</span>
+<span class="k">end</span></code></pre></figure>
 
 <p>Tạo <code class="highlighter-rouge">SearchesController</code> để tìm cả Users lẫn Badges
 <strong>SeachesController</strong></p>
 
-<pre><code class="language-Ruby">class SearchesController &lt; ApplicationController
-  def index
-    q = params[:search]
-    users = User.search(fullname_or_username_or_email_cont: q).result
-    badges = Badge.search(name_or_user_fullname_cont: q).result
-      .includes(:user)
-    @items = users + badges
-    respond_to do |format|
-      format.js
-      format.html
-    end
-  end
-end
-</code></pre>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Ruby</span>
+<span class="k">class</span> <span class="nc">SearchesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+  <span class="k">def</span> <span class="nf">index</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="ss">:search</span><span class="p">]</span>
+    <span class="n">users</span> <span class="o">=</span> <span class="no">User</span><span class="p">.</span><span class="nf">search</span><span class="p">(</span><span class="ss">fullname_or_username_or_email_cont: </span><span class="n">q</span><span class="p">).</span><span class="nf">result</span>
+    <span class="n">badges</span> <span class="o">=</span> <span class="no">Badge</span><span class="p">.</span><span class="nf">search</span><span class="p">(</span><span class="ss">name_or_user_fullname_cont: </span><span class="n">q</span><span class="p">).</span><span class="nf">result</span>
+      <span class="p">.</span><span class="nf">includes</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span>
+    <span class="vi">@items</span> <span class="o">=</span> <span class="n">users</span> <span class="o">+</span> <span class="n">badges</span>
+    <span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
+      <span class="nb">format</span><span class="p">.</span><span class="nf">js</span>
+      <span class="nb">format</span><span class="p">.</span><span class="nf">html</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></figure>
 
 <p>Ở đây mình dùng các pattern search của gem Ransack nên có khó hiểu thì tìm hiểu gem này nhé. Mình cũng trả về chung 1 mảng dữ liệu là @items, sau đó sẽ xử lí dưới view sau.</p>
 
 <p><strong>UsersController</strong></p>
 
-<pre><code class="language-Ruby">class UsersController &lt; ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Ruby</span>
+<span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+  <span class="n">before_action</span> <span class="ss">:set_user</span><span class="p">,</span> <span class="ss">only: </span><span class="p">[</span><span class="ss">:show</span><span class="p">,</span> <span class="ss">:edit</span><span class="p">,</span> <span class="ss">:update</span><span class="p">,</span> <span class="ss">:destroy</span><span class="p">]</span>
 
-  # GET /users
-  # GET /users.json
-  def index
-    q = params[:search]
-    if q
-      @users = User.search(fullname_or_username_or_email_cont: q).result
-    else
-      @users = User.all
-    end
-    respond_to do |format|
-      format.js
-      format.html
-    end
-  end
+  <span class="c1"># GET /users</span>
+  <span class="c1"># GET /users.json</span>
+  <span class="k">def</span> <span class="nf">index</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="ss">:search</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">q</span>
+      <span class="vi">@users</span> <span class="o">=</span> <span class="no">User</span><span class="p">.</span><span class="nf">search</span><span class="p">(</span><span class="ss">fullname_or_username_or_email_cont: </span><span class="n">q</span><span class="p">).</span><span class="nf">result</span>
+    <span class="k">else</span>
+      <span class="vi">@users</span> <span class="o">=</span> <span class="no">User</span><span class="p">.</span><span class="nf">all</span>
+    <span class="k">end</span>
+    <span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
+      <span class="nb">format</span><span class="p">.</span><span class="nf">js</span>
+      <span class="nb">format</span><span class="p">.</span><span class="nf">html</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
 
-  # GET /users/1
-  # GET /users/1.json
-  def show
-  end
+  <span class="c1"># GET /users/1</span>
+  <span class="c1"># GET /users/1.json</span>
+  <span class="k">def</span> <span class="nf">show</span>
+  <span class="k">end</span>
 
-  # GET /users/new
-  def new
-    @user = User.new
-  end
+  <span class="c1"># GET /users/new</span>
+  <span class="k">def</span> <span class="nf">new</span>
+    <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="p">.</span><span class="nf">new</span>
+  <span class="k">end</span>
 
-  # GET /users/1/edit
-  def edit
-  end
+  <span class="c1"># GET /users/1/edit</span>
+  <span class="k">def</span> <span class="nf">edit</span>
+  <span class="k">end</span>
 
-  # POST /users
-  # POST /users.json
-  def create
-    @user = User.new(user_params)
+  <span class="c1"># POST /users</span>
+  <span class="c1"># POST /users.json</span>
+  <span class="k">def</span> <span class="nf">create</span>
+    <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">user_params</span><span class="p">)</span>
 
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
-      else
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+    <span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
+      <span class="k">if</span> <span class="vi">@user</span><span class="p">.</span><span class="nf">save</span>
+        <span class="nb">format</span><span class="p">.</span><span class="nf">html</span> <span class="p">{</span> <span class="n">redirect_to</span> <span class="vi">@user</span><span class="p">,</span> <span class="ss">notice: </span><span class="s1">'User was successfully created.'</span> <span class="p">}</span>
+        <span class="nb">format</span><span class="p">.</span><span class="nf">json</span> <span class="p">{</span> <span class="n">render</span> <span class="ss">:show</span><span class="p">,</span> <span class="ss">status: :created</span><span class="p">,</span> <span class="ss">location: </span><span class="vi">@user</span> <span class="p">}</span>
+      <span class="k">else</span>
+        <span class="nb">format</span><span class="p">.</span><span class="nf">html</span> <span class="p">{</span> <span class="n">render</span> <span class="ss">:new</span> <span class="p">}</span>
+        <span class="nb">format</span><span class="p">.</span><span class="nf">json</span> <span class="p">{</span> <span class="n">render</span> <span class="ss">json: </span><span class="vi">@user</span><span class="p">.</span><span class="nf">errors</span><span class="p">,</span> <span class="ss">status: :unprocessable_entity</span> <span class="p">}</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
 
-  # PATCH/PUT /users/1
-  # PATCH/PUT /users/1.json
-  def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  <span class="c1"># PATCH/PUT /users/1</span>
+  <span class="c1"># PATCH/PUT /users/1.json</span>
+  <span class="k">def</span> <span class="nf">update</span>
+    <span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
+      <span class="k">if</span> <span class="vi">@user</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="n">user_params</span><span class="p">)</span>
+        <span class="nb">format</span><span class="p">.</span><span class="nf">html</span> <span class="p">{</span> <span class="n">redirect_to</span> <span class="vi">@user</span><span class="p">,</span> <span class="ss">notice: </span><span class="s1">'User was successfully updated.'</span> <span class="p">}</span>
+        <span class="nb">format</span><span class="p">.</span><span class="nf">json</span> <span class="p">{</span> <span class="n">render</span> <span class="ss">:show</span><span class="p">,</span> <span class="ss">status: :ok</span><span class="p">,</span> <span class="ss">location: </span><span class="vi">@user</span> <span class="p">}</span>
+      <span class="k">else</span>
+        <span class="nb">format</span><span class="p">.</span><span class="nf">html</span> <span class="p">{</span> <span class="n">render</span> <span class="ss">:edit</span> <span class="p">}</span>
+        <span class="nb">format</span><span class="p">.</span><span class="nf">json</span> <span class="p">{</span> <span class="n">render</span> <span class="ss">json: </span><span class="vi">@user</span><span class="p">.</span><span class="nf">errors</span><span class="p">,</span> <span class="ss">status: :unprocessable_entity</span> <span class="p">}</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
 
-  # DELETE /users/1
-  # DELETE /users/1.json
-  def destroy
-    @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
+  <span class="c1"># DELETE /users/1</span>
+  <span class="c1"># DELETE /users/1.json</span>
+  <span class="k">def</span> <span class="nf">destroy</span>
+    <span class="vi">@user</span><span class="p">.</span><span class="nf">destroy</span>
+    <span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
+      <span class="nb">format</span><span class="p">.</span><span class="nf">html</span> <span class="p">{</span> <span class="n">redirect_to</span> <span class="n">users_url</span><span class="p">,</span> <span class="ss">notice: </span><span class="s1">'User was successfully destroyed.'</span> <span class="p">}</span>
+      <span class="nb">format</span><span class="p">.</span><span class="nf">json</span> <span class="p">{</span> <span class="n">head</span> <span class="ss">:no_content</span> <span class="p">}</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
+  <span class="kp">private</span>
+    <span class="c1"># Use callbacks to share common setup or constraints between actions.</span>
+    <span class="k">def</span> <span class="nf">set_user</span>
+      <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:id</span><span class="p">])</span>
+    <span class="k">end</span>
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params.require(:user).permit(:username, :fullname, :email, :avatar)
-    end
-end
-</code></pre>
+    <span class="c1"># Never trust parameters from the scary internet, only allow the white list through.</span>
+    <span class="k">def</span> <span class="nf">user_params</span>
+      <span class="n">params</span><span class="p">.</span><span class="nf">require</span><span class="p">(</span><span class="ss">:user</span><span class="p">).</span><span class="nf">permit</span><span class="p">(</span><span class="ss">:username</span><span class="p">,</span> <span class="ss">:fullname</span><span class="p">,</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">:avatar</span><span class="p">)</span>
+    <span class="k">end</span>
+<span class="k">end</span></code></pre></figure>
 
 <p>Cái này mình generate scaffold nên nó nhìu như vậy. Tương tự badges cũng thế. Hai cái này mình chỉ sửa lại action index thôi :D</p>
 
 <p><strong>BadgesController</strong></p>
 
-<pre><code class="language-Ruby">class BadgesController &lt; ApplicationController
-  before_action :set_badge, only: [:show, :edit, :update, :destroy]
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Ruby</span>
+<span class="k">class</span> <span class="nc">BadgesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+  <span class="n">before_action</span> <span class="ss">:set_badge</span><span class="p">,</span> <span class="ss">only: </span><span class="p">[</span><span class="ss">:show</span><span class="p">,</span> <span class="ss">:edit</span><span class="p">,</span> <span class="ss">:update</span><span class="p">,</span> <span class="ss">:destroy</span><span class="p">]</span>
 
-  # GET /badges
-  # GET /badges.json
-  def index
-    q = params[:search]
-    if q
-      @badges = Badge.search(name_or_user_fullname_cont: q).result
-    else
-      @badges = Badge.all
-    end
-    respond_to do |format|
-      format.js
-      format.html
-    end
-  end
+  <span class="c1"># GET /badges</span>
+  <span class="c1"># GET /badges.json</span>
+  <span class="k">def</span> <span class="nf">index</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="ss">:search</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">q</span>
+      <span class="vi">@badges</span> <span class="o">=</span> <span class="no">Badge</span><span class="p">.</span><span class="nf">search</span><span class="p">(</span><span class="ss">name_or_user_fullname_cont: </span><span class="n">q</span><span class="p">).</span><span class="nf">result</span>
+    <span class="k">else</span>
+      <span class="vi">@badges</span> <span class="o">=</span> <span class="no">Badge</span><span class="p">.</span><span class="nf">all</span>
+    <span class="k">end</span>
+    <span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
+      <span class="nb">format</span><span class="p">.</span><span class="nf">js</span>
+      <span class="nb">format</span><span class="p">.</span><span class="nf">html</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
 
-  # GET /badges/1
-  # GET /badges/1.json
-  def show
-  end
+  <span class="c1"># GET /badges/1</span>
+  <span class="c1"># GET /badges/1.json</span>
+  <span class="k">def</span> <span class="nf">show</span>
+  <span class="k">end</span>
 
-  # GET /badges/new
-  def new
-    @badge = Badge.new
-  end
+  <span class="c1"># GET /badges/new</span>
+  <span class="k">def</span> <span class="nf">new</span>
+    <span class="vi">@badge</span> <span class="o">=</span> <span class="no">Badge</span><span class="p">.</span><span class="nf">new</span>
+  <span class="k">end</span>
 
-  # GET /badges/1/edit
-  def edit
-  end
+  <span class="c1"># GET /badges/1/edit</span>
+  <span class="k">def</span> <span class="nf">edit</span>
+  <span class="k">end</span>
 
-  # POST /badges
-  # POST /badges.json
-  def create
-    @badge = Badge.new(badge_params)
+  <span class="c1"># POST /badges</span>
+  <span class="c1"># POST /badges.json</span>
+  <span class="k">def</span> <span class="nf">create</span>
+    <span class="vi">@badge</span> <span class="o">=</span> <span class="no">Badge</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">badge_params</span><span class="p">)</span>
 
-    respond_to do |format|
-      if @badge.save
-        format.html { redirect_to @badge, notice: 'Badge was successfully created.' }
-        format.json { render :show, status: :created, location: @badge }
-      else
-        format.html { render :new }
-        format.json { render json: @badge.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+    <span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
+      <span class="k">if</span> <span class="vi">@badge</span><span class="p">.</span><span class="nf">save</span>
+        <span class="nb">format</span><span class="p">.</span><span class="nf">html</span> <span class="p">{</span> <span class="n">redirect_to</span> <span class="vi">@badge</span><span class="p">,</span> <span class="ss">notice: </span><span class="s1">'Badge was successfully created.'</span> <span class="p">}</span>
+        <span class="nb">format</span><span class="p">.</span><span class="nf">json</span> <span class="p">{</span> <span class="n">render</span> <span class="ss">:show</span><span class="p">,</span> <span class="ss">status: :created</span><span class="p">,</span> <span class="ss">location: </span><span class="vi">@badge</span> <span class="p">}</span>
+      <span class="k">else</span>
+        <span class="nb">format</span><span class="p">.</span><span class="nf">html</span> <span class="p">{</span> <span class="n">render</span> <span class="ss">:new</span> <span class="p">}</span>
+        <span class="nb">format</span><span class="p">.</span><span class="nf">json</span> <span class="p">{</span> <span class="n">render</span> <span class="ss">json: </span><span class="vi">@badge</span><span class="p">.</span><span class="nf">errors</span><span class="p">,</span> <span class="ss">status: :unprocessable_entity</span> <span class="p">}</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
 
-  # PATCH/PUT /badges/1
-  # PATCH/PUT /badges/1.json
-  def update
-    respond_to do |format|
-      if @badge.update(badge_params)
-        format.html { redirect_to @badge, notice: 'Badge was successfully updated.' }
-        format.json { render :show, status: :ok, location: @badge }
-      else
-        format.html { render :edit }
-        format.json { render json: @badge.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  <span class="c1"># PATCH/PUT /badges/1</span>
+  <span class="c1"># PATCH/PUT /badges/1.json</span>
+  <span class="k">def</span> <span class="nf">update</span>
+    <span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
+      <span class="k">if</span> <span class="vi">@badge</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="n">badge_params</span><span class="p">)</span>
+        <span class="nb">format</span><span class="p">.</span><span class="nf">html</span> <span class="p">{</span> <span class="n">redirect_to</span> <span class="vi">@badge</span><span class="p">,</span> <span class="ss">notice: </span><span class="s1">'Badge was successfully updated.'</span> <span class="p">}</span>
+        <span class="nb">format</span><span class="p">.</span><span class="nf">json</span> <span class="p">{</span> <span class="n">render</span> <span class="ss">:show</span><span class="p">,</span> <span class="ss">status: :ok</span><span class="p">,</span> <span class="ss">location: </span><span class="vi">@badge</span> <span class="p">}</span>
+      <span class="k">else</span>
+        <span class="nb">format</span><span class="p">.</span><span class="nf">html</span> <span class="p">{</span> <span class="n">render</span> <span class="ss">:edit</span> <span class="p">}</span>
+        <span class="nb">format</span><span class="p">.</span><span class="nf">json</span> <span class="p">{</span> <span class="n">render</span> <span class="ss">json: </span><span class="vi">@badge</span><span class="p">.</span><span class="nf">errors</span><span class="p">,</span> <span class="ss">status: :unprocessable_entity</span> <span class="p">}</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
 
-  # DELETE /badges/1
-  # DELETE /badges/1.json
-  def destroy
-    @badge.destroy
-    respond_to do |format|
-      format.html { redirect_to badges_url, notice: 'Badge was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
+  <span class="c1"># DELETE /badges/1</span>
+  <span class="c1"># DELETE /badges/1.json</span>
+  <span class="k">def</span> <span class="nf">destroy</span>
+    <span class="vi">@badge</span><span class="p">.</span><span class="nf">destroy</span>
+    <span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
+      <span class="nb">format</span><span class="p">.</span><span class="nf">html</span> <span class="p">{</span> <span class="n">redirect_to</span> <span class="n">badges_url</span><span class="p">,</span> <span class="ss">notice: </span><span class="s1">'Badge was successfully destroyed.'</span> <span class="p">}</span>
+      <span class="nb">format</span><span class="p">.</span><span class="nf">json</span> <span class="p">{</span> <span class="n">head</span> <span class="ss">:no_content</span> <span class="p">}</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_badge
-      @badge = Badge.find(params[:id])
-    end
+  <span class="kp">private</span>
+    <span class="c1"># Use callbacks to share common setup or constraints between actions.</span>
+    <span class="k">def</span> <span class="nf">set_badge</span>
+      <span class="vi">@badge</span> <span class="o">=</span> <span class="no">Badge</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:id</span><span class="p">])</span>
+    <span class="k">end</span>
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def badge_params
-      params.require(:badge).permit(:name, :image, :user_id)
-    end
-end
-</code></pre>
+    <span class="c1"># Never trust parameters from the scary internet, only allow the white list through.</span>
+    <span class="k">def</span> <span class="nf">badge_params</span>
+      <span class="n">params</span><span class="p">.</span><span class="nf">require</span><span class="p">(</span><span class="ss">:badge</span><span class="p">).</span><span class="nf">permit</span><span class="p">(</span><span class="ss">:name</span><span class="p">,</span> <span class="ss">:image</span><span class="p">,</span> <span class="ss">:user_id</span><span class="p">)</span>
+    <span class="k">end</span>
+<span class="k">end</span></code></pre></figure>
 
 <h3 id="33-tạo-views"><strong>3.3. Tạo views</strong></h3>
 
 <p>Ở file _header.html.erb mình làm 3 thanh navbar:</p>
 
-<pre><code class="language-HTML">&lt;nav class="navbar navbar-default"&gt;
-  &lt;div class="row"&gt;
-    &lt;!-- Brand and toggle get grouped for better mobile display --&gt;
-    &lt;div class="col-md-2"&gt;
-      &lt;a class="navbar-brand" href="#"&gt;All&lt;/a&gt;
-    &lt;/div&gt;
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">HTML</span>
+<span class="o">&lt;</span><span class="n">nav</span> <span class="k">class</span><span class="o">=</span><span class="s2">"navbar navbar-default"</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">div</span> <span class="k">class</span><span class="o">=</span><span class="s2">"row"</span><span class="o">&gt;</span>
+    <span class="o">&lt;!--</span> <span class="no">Brand</span> <span class="n">and</span> <span class="n">toggle</span> <span class="n">get</span> <span class="n">grouped</span> <span class="k">for</span> <span class="n">better</span> <span class="n">mobile</span> <span class="nb">display</span> <span class="o">--&gt;</span>
+    <span class="o">&lt;</span><span class="n">div</span> <span class="k">class</span><span class="o">=</span><span class="s2">"col-md-2"</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">a</span> <span class="k">class</span><span class="o">=</span><span class="s2">"navbar-brand"</span> <span class="n">href</span><span class="o">=</span><span class="s2">"#"</span><span class="o">&gt;</span><span class="no">All</span><span class="o">&lt;</span><span class="sr">/a&gt;
+    &lt;/</span><span class="n">div</span><span class="o">&gt;</span>
 
-    &lt;!-- Collect the nav links, forms, and other content for toggling --&gt;
-    &lt;div class="col-md-8"&gt;
-      &lt;%= form_tag search_path, method: :get,
+    <span class="o">&lt;!--</span> <span class="no">Collect</span> <span class="n">the</span> <span class="n">nav</span> <span class="n">links</span><span class="p">,</span> <span class="n">forms</span><span class="p">,</span> <span class="n">and</span> <span class="n">other</span> <span class="n">content</span> <span class="k">for</span> <span class="n">toggling</span> <span class="o">--&gt;</span>
+    <span class="o">&lt;</span><span class="n">div</span> <span class="k">class</span><span class="o">=</span><span class="s2">"col-md-8"</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="sx">%= form_tag search_path, method: :get,
         class: "navbar-form search-form", id: "livesearch_form" do %&gt;
-        &lt;div class="form-group dropdown"&gt;
-          &lt;%= text_field_tag :search, params[:search],
+        &lt;div class=</span><span class="s2">"form-group dropdown"</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="sx">%= text_field_tag :search, params[:search],
             class: "form-control dropdown-toggle",
             placeholder: "Search...",
             "data-toggle": "dropdown", "aria-hidden": :true,
             autocomplete: :off, required: true, id: "livesearch_input" %&gt;
-          &lt;ul class="dropdown-menu"&gt;
-            &lt;div id="livesearch_dom"&gt;&lt;/div&gt;
-          &lt;/ul&gt;
-        &lt;/div&gt;
+          &lt;ul class=</span><span class="s2">"dropdown-menu"</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="n">div</span> <span class="nb">id</span><span class="o">=</span><span class="s2">"livesearch_dom"</span><span class="o">&gt;&lt;</span><span class="sr">/div&gt;
+          &lt;/u</span><span class="n">l</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="sr">/div&gt;
         &lt;%= button_tag type: :submit, class: "btn btn-default" do %&gt;
-          &lt;i class="fa fa-search"&gt;&lt;/i&gt;
-        &lt;% end %&gt;
-      &lt;% end %&gt;
-    &lt;/div&gt;&lt;!-- /.navbar-collapse --&gt;
-  &lt;/div&gt;&lt;!-- /.container-fluid --&gt;
-&lt;/nav&gt;
+          &lt;i class="fa fa-search"&gt;&lt;/i</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="sx">% end </span><span class="o">%&gt;</span>
+      <span class="o">&lt;</span><span class="sx">% end </span><span class="o">%&gt;</span>
+    <span class="o">&lt;</span><span class="sr">/div&gt;&lt;!-- /</span><span class="p">.</span><span class="nf">navbar</span><span class="o">-</span><span class="n">collapse</span> <span class="o">--&gt;</span>
+  <span class="o">&lt;</span><span class="sr">/div&gt;&lt;!-- /</span><span class="p">.</span><span class="nf">container</span><span class="o">-</span><span class="n">fluid</span> <span class="o">--&gt;</span>
+<span class="o">&lt;</span><span class="sr">/nav&gt;
 
 &lt;nav class="navbar navbar-default"&gt;
   &lt;div class="row"&gt;
     &lt;!-- Brand and toggle get grouped for better mobile display --&gt;
     &lt;div class="col-md-2"&gt;
-      &lt;a class="navbar-brand" href="#"&gt;Users&lt;/a&gt;
-    &lt;/div&gt;
+      &lt;a class="navbar-brand" href="#"&gt;Users&lt;/</span><span class="n">a</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="sr">/div&gt;
 
     &lt;!-- Collect the nav links, forms, and other content for toggling --&gt;
     &lt;div class="col-md-8"&gt;
@@ -541,24 +542,24 @@ end
             "data-toggle": "dropdown", "aria-hidden": :true,
             autocomplete: :off, required: true, id: "livesearch_user_input" %&gt;
           &lt;ul class="dropdown-menu"&gt;
-            &lt;div id="livesearch_user_dom"&gt;&lt;/div&gt;
-            &lt;div id="livesearch_user_loading"&gt;&lt;/div&gt;
-          &lt;/ul&gt;
-        &lt;/div&gt;
+            &lt;div id="livesearch_user_dom"&gt;&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="n">div</span> <span class="nb">id</span><span class="o">=</span><span class="s2">"livesearch_user_loading"</span><span class="o">&gt;&lt;</span><span class="sr">/div&gt;
+          &lt;/u</span><span class="n">l</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="sr">/div&gt;
         &lt;%= button_tag type: :submit, class: "btn btn-default" do %&gt;
-          &lt;i class="fa fa-search"&gt;&lt;/i&gt;
-        &lt;% end %&gt;
-      &lt;% end %&gt;
-    &lt;/div&gt;&lt;!-- /.navbar-collapse --&gt;
-  &lt;/div&gt;&lt;!-- /.container-fluid --&gt;
-&lt;/nav&gt;
+          &lt;i class="fa fa-search"&gt;&lt;/i</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="sx">% end </span><span class="o">%&gt;</span>
+      <span class="o">&lt;</span><span class="sx">% end </span><span class="o">%&gt;</span>
+    <span class="o">&lt;</span><span class="sr">/div&gt;&lt;!-- /</span><span class="p">.</span><span class="nf">navbar</span><span class="o">-</span><span class="n">collapse</span> <span class="o">--&gt;</span>
+  <span class="o">&lt;</span><span class="sr">/div&gt;&lt;!-- /</span><span class="p">.</span><span class="nf">container</span><span class="o">-</span><span class="n">fluid</span> <span class="o">--&gt;</span>
+<span class="o">&lt;</span><span class="sr">/nav&gt;
 
 &lt;nav class="navbar navbar-default"&gt;
   &lt;div class="row"&gt;
     &lt;!-- Brand and toggle get grouped for better mobile display --&gt;
     &lt;div class="col-md-2"&gt;
-      &lt;a class="navbar-brand" href="#"&gt;Badges&lt;/a&gt;
-    &lt;/div&gt;
+      &lt;a class="navbar-brand" href="#"&gt;Badges&lt;/</span><span class="n">a</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="sr">/div&gt;
 
     &lt;!-- Collect the nav links, forms, and other content for toggling --&gt;
     &lt;div class="col-md-8"&gt;
@@ -571,18 +572,17 @@ end
             "data-toggle": "dropdown", "aria-hidden": :true,
             autocomplete: :off, required: true, id: "livesearch_badge_input" %&gt;
           &lt;ul class="dropdown-menu"&gt;
-            &lt;div id="livesearch_badge_dom"&gt;&lt;/div&gt;
-            &lt;div id="livesearch_badge_loading"&gt;&lt;/div&gt;
-          &lt;/ul&gt;
-        &lt;/div&gt;
+            &lt;div id="livesearch_badge_dom"&gt;&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="n">div</span> <span class="nb">id</span><span class="o">=</span><span class="s2">"livesearch_badge_loading"</span><span class="o">&gt;&lt;</span><span class="sr">/div&gt;
+          &lt;/u</span><span class="n">l</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="sr">/div&gt;
         &lt;%= button_tag type: :submit, class: "btn btn-default" do %&gt;
-          &lt;i class="fa fa-search"&gt;&lt;/i&gt;
-        &lt;% end %&gt;
-      &lt;% end %&gt;
-    &lt;/div&gt;&lt;!-- /.navbar-collapse --&gt;
-  &lt;/div&gt;&lt;!-- /.container-fluid --&gt;
-&lt;/nav&gt;
-</code></pre>
+          &lt;i class="fa fa-search"&gt;&lt;/i</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="sx">% end </span><span class="o">%&gt;</span>
+      <span class="o">&lt;</span><span class="sx">% end </span><span class="o">%&gt;</span>
+    <span class="o">&lt;</span><span class="sr">/div&gt;&lt;!-- /</span><span class="p">.</span><span class="nf">navbar</span><span class="o">-</span><span class="n">collapse</span> <span class="o">--&gt;</span>
+  <span class="o">&lt;</span><span class="sr">/div&gt;&lt;!-- /</span><span class="p">.</span><span class="nf">container</span><span class="o">-</span><span class="n">fluid</span> <span class="o">--&gt;</span>
+<span class="o">&lt;</span><span class="sr">/nav&gt;</span></code></pre></figure>
 
 <p>Ban đầu chỉ định thêm một cái thôi, nhưng nhác quá nên quất cả 3 cái trong này luôn.</p>
 
@@ -590,32 +590,32 @@ end
 
 <p>Mình tạo folder <code class="highlighter-rouge">app/views/shared</code> và tạo file <code class="highlighter-rouge">_search.html.erb</code>. Mục đích là định nghĩa cái view kết quả khi tìm kiếm ở khung tìm kiếm cả Users và Badges.</p>
 
-<pre><code class="language-HTML">&lt;% if items.blank? %&gt;
-  &lt;li&gt;
-    &lt;%= link_to search_path(params[:search]),
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">HTML</span>
+<span class="o">&lt;</span><span class="sx">% if </span><span class="n">items</span><span class="p">.</span><span class="nf">blank?</span> <span class="sx">%&gt;
+  &lt;li&gt;</span>
+    <span class="o">&lt;</span><span class="sx">%= link_to search_path(params[:search]),
       class: "btn btn-default btn-block" do %&gt;
-      &lt;%= "No results for #{params[:search]}" %&gt;
-    &lt;% end %&gt;
-  &lt;/li&gt;
+      &lt;%=</span> <span class="s2">"No results for </span><span class="si">#{</span><span class="n">params</span><span class="p">[</span><span class="ss">:search</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span> <span class="o">%&gt;</span>
+    <span class="o">&lt;</span><span class="sx">% end </span><span class="o">%&gt;</span>
+  <span class="o">&lt;</span><span class="sr">/li&gt;
 &lt;% else %&gt;
   &lt;div class="scrollable-menu"&gt;
     &lt;% items.each do |item| %&gt;
       &lt;% if item.is_a? User %&gt;
-        &lt;%= render "users/search_item", user: item %&gt;
+        &lt;%= render "users/se</span><span class="n">arch_item</span><span class="s2">", user: item %&gt;
       &lt;% elsif item.is_a? Badge %&gt;
-        &lt;%= render "badges/search_item", badge: item %&gt;
+        &lt;%= render "</span><span class="n">badges</span><span class="o">/</span><span class="n">search_item</span><span class="s2">", badge: item %&gt;
       &lt;% end %&gt;
     &lt;% end %&gt;
   &lt;/div&gt;
-  &lt;li class="divider"&gt;&lt;/li&gt;
+  &lt;li class="</span><span class="n">divider</span><span class="s2">"&gt;&lt;/li&gt;
   &lt;li&gt;
     &lt;%= link_to search_path(params[:search]),
-      class: "btn btn-default btn-block" do %&gt;
-      &lt;%= "See more #{items.size} for #{params[:search]}" %&gt;
-    &lt;% end %&gt;
-  &lt;/li&gt;
-&lt;% end %&gt;
-</code></pre>
+      class: "</span><span class="n">btn</span> <span class="n">btn</span><span class="o">-</span><span class="n">default</span> <span class="n">btn</span><span class="o">-</span><span class="n">block</span><span class="s2">" do %&gt;
+      &lt;%= "</span><span class="no">See</span> <span class="n">more</span> <span class="c1">#{items.size} for #{params[:search]}" %&gt;</span>
+    <span class="o">&lt;</span><span class="sx">% end </span><span class="o">%&gt;</span>
+  <span class="o">&lt;</span><span class="sr">/li&gt;
+&lt;% end %&gt;</span></code></pre></figure>
 
 <p>Như khi nãy mình có nói là mình truyền về @items, thì trong này mình sẽ check xem từng từng item đó là gì và hiển thị partial tương ứng.</p>
 
@@ -624,55 +624,55 @@ end
 <p>Mình tạo thêm partial <code class="highlighter-rouge">search_item</code> cho users bằng cách tạo file <code class="highlighter-rouge">_search_item.html.erb</code> trong folder <code class="highlighter-rouge">app/views/users</code>
 <strong>_search_item.html.erb</strong></p>
 
-<pre><code class="language-HTML">&lt;li class="search-item"&gt;
-  &lt;%= link_to user do %&gt;
-    &lt;div class="col-md-3"&gt;
-      &lt;%= image_tag user.avatar, class: "img-responsive" %&gt;
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">HTML</span>
+<span class="o">&lt;</span><span class="n">li</span> <span class="k">class</span><span class="o">=</span><span class="s2">"search-item"</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="sx">%= link_to user do %&gt;
+    &lt;div class=</span><span class="s2">"col-md-3"</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="sx">%= image_tag user.avatar, class: "img-responsive" %&gt;
     &lt;/div&gt;
-    &lt;div class="col-md-9"&gt;
-      &lt;div class="row"&gt;
-        &lt;strong&gt;&lt;%= user.fullname %&gt;&lt;/strong&gt;
+    &lt;div class=</span><span class="s2">"col-md-9"</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">div</span> <span class="k">class</span><span class="o">=</span><span class="s2">"row"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">strong</span><span class="o">&gt;&lt;</span><span class="sx">%= user.fullname %&gt;&lt;/strong&gt;
       &lt;/div&gt;
-      &lt;div class="row"&gt;
-        &lt;div class="col-md-8"&gt;
-          &lt;%= user.email %&gt;
+      &lt;div class=</span><span class="s2">"row"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">div</span> <span class="k">class</span><span class="o">=</span><span class="s2">"col-md-8"</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="sx">%= user.email %&gt;
         &lt;/div&gt;
       &lt;/div&gt;
-      &lt;div class="row"&gt;
-        &lt;i&gt;&lt;%= User.name %&gt;&lt;/i&gt;
+      &lt;div class=</span><span class="s2">"row"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">i</span><span class="o">&gt;&lt;</span><span class="sx">%= User.name %&gt;&lt;/i&gt;
       &lt;/div&gt;
     &lt;/div&gt;
-    &lt;div class="clearfix"&gt;&lt;/div&gt;
+    &lt;div class=</span><span class="s2">"clearfix"</span><span class="o">&gt;&lt;</span><span class="sr">/div&gt;
   &lt;% end %&gt;
-&lt;/li&gt;
-</code></pre>
+&lt;/</span><span class="n">li</span><span class="o">&gt;</span></code></pre></figure>
 
 <p>Tương tự cho Badges, tạo file <code class="highlighter-rouge">_search_item.html.erb</code> trong folder <code class="highlighter-rouge">app/views/badges</code></p>
 
 <p><strong>_search_item.html.erb</strong></p>
 
-<pre><code class="language-HTML">&lt;li class="search-item"&gt;
-  &lt;%= link_to badge do %&gt;
-    &lt;div class="col-xs-12 col-sm-3 col-md-3"&gt;
-      &lt;%= image_tag badge.image, class: "img-responsive" %&gt;
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">HTML</span>
+<span class="o">&lt;</span><span class="n">li</span> <span class="k">class</span><span class="o">=</span><span class="s2">"search-item"</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="sx">%= link_to badge do %&gt;
+    &lt;div class=</span><span class="s2">"col-xs-12 col-sm-3 col-md-3"</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="sx">%= image_tag badge.image, class: "img-responsive" %&gt;
     &lt;/div&gt;
-    &lt;div class="col-xs-12 col-sm-9 col-md-9"&gt;
-      &lt;div class="row"&gt;
-        &lt;strong&gt;&lt;%= badge.name %&gt;&lt;/strong&gt;
+    &lt;div class=</span><span class="s2">"col-xs-12 col-sm-9 col-md-9"</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">div</span> <span class="k">class</span><span class="o">=</span><span class="s2">"row"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">strong</span><span class="o">&gt;&lt;</span><span class="sx">%= badge.name %&gt;&lt;/strong&gt;
       &lt;/div&gt;
-      &lt;div class="row"&gt;
-        &lt;div class="col-md-8"&gt;
-          &lt;%= badge.user.fullname %&gt;
+      &lt;div class=</span><span class="s2">"row"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">div</span> <span class="k">class</span><span class="o">=</span><span class="s2">"col-md-8"</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="sx">%= badge.user.fullname %&gt;
         &lt;/div&gt;
       &lt;/div&gt;
-      &lt;div class="row"&gt;
-        &lt;i&gt;&lt;%= Badge.name %&gt;&lt;/i&gt;
+      &lt;div class=</span><span class="s2">"row"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">i</span><span class="o">&gt;&lt;</span><span class="sx">%= Badge.name %&gt;&lt;/i&gt;
       &lt;/div&gt;
     &lt;/div&gt;
-    &lt;div class="clearfix"&gt;&lt;/div&gt;
+    &lt;div class=</span><span class="s2">"clearfix"</span><span class="o">&gt;&lt;</span><span class="sr">/div&gt;
   &lt;% end %&gt;
-&lt;/li&gt;
-</code></pre>
+&lt;/</span><span class="n">li</span><span class="o">&gt;</span></code></pre></figure>
 
 <p>Vậy là xong cho view. Tiếp theo chúng ta sẽ thêm vài đoạn JS để nó chạy nào.</p>
 
@@ -684,54 +684,54 @@ end
 
 <p><strong>header.js</strong></p>
 
-<pre><code class="language-JavaScript">$(document).ready(function() {
-  $('#livesearch_input').hsearchbox({
-    url: $('#livesearch_form').attr('action'),
-    param: 'search',
-    dom_id: '#livesearch_dom',
-    loading_css: '#livesearch_loading',
-    onInitSearch: function() {
-      console.log("search init:" + this.url);
-    },
-    onStartSearch: function() {
-      console.log("search start");
-    },
-    onFinishSearch: function() {
-      console.log("search finish");
-    }
-  });
-  $('#livesearch_user_input').hsearchbox({
-    url: $('#livesearch_user_form').attr('action'),
-    param: 'search',
-    dom_id: '#livesearch_user_dom',
-    loading_css: '#livesearch_user_loading',
-    onInitSearch: function() {
-      console.log("user init:" + this.url);
-    },
-    onStartSearch: function() {
-      console.log("user start");
-    },
-    onFinishSearch: function() {
-      console.log("user finish");
-    }
-  });
-  $('#livesearch_badge_input').hsearchbox({
-    url: $('#livesearch_badge_form').attr('action'),
-    param: 'search',
-    dom_id: '#livesearch_badge_dom',
-    loading_css: '#livesearch_badge_loading',
-    onInitSearch: function() {
-      console.log("badge init:" + this.url);
-    },
-    onStartSearch: function() {
-      console.log("badge start");
-    },
-    onFinishSearch: function() {
-      console.log("badge finish");
-    }
-  });
-});
-</code></pre>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">JavaScript</span>
+<span class="err">$</span><span class="p">(</span><span class="n">document</span><span class="p">).</span><span class="nf">ready</span><span class="p">(</span><span class="n">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="err">$</span><span class="p">(</span><span class="s1">'#livesearch_input'</span><span class="p">).</span><span class="nf">hsearchbox</span><span class="p">({</span>
+    <span class="ss">url: </span><span class="err">$</span><span class="p">(</span><span class="s1">'#livesearch_form'</span><span class="p">).</span><span class="nf">attr</span><span class="p">(</span><span class="s1">'action'</span><span class="p">),</span>
+    <span class="ss">param: </span><span class="s1">'search'</span><span class="p">,</span>
+    <span class="ss">dom_id: </span><span class="s1">'#livesearch_dom'</span><span class="p">,</span>
+    <span class="ss">loading_css: </span><span class="s1">'#livesearch_loading'</span><span class="p">,</span>
+    <span class="ss">onInitSearch: </span><span class="n">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="s2">"search init:"</span> <span class="o">+</span> <span class="n">this</span><span class="p">.</span><span class="nf">url</span><span class="p">);</span>
+    <span class="p">},</span>
+    <span class="ss">onStartSearch: </span><span class="n">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="s2">"search start"</span><span class="p">);</span>
+    <span class="p">},</span>
+    <span class="ss">onFinishSearch: </span><span class="n">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="s2">"search finish"</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+  <span class="err">$</span><span class="p">(</span><span class="s1">'#livesearch_user_input'</span><span class="p">).</span><span class="nf">hsearchbox</span><span class="p">({</span>
+    <span class="ss">url: </span><span class="err">$</span><span class="p">(</span><span class="s1">'#livesearch_user_form'</span><span class="p">).</span><span class="nf">attr</span><span class="p">(</span><span class="s1">'action'</span><span class="p">),</span>
+    <span class="ss">param: </span><span class="s1">'search'</span><span class="p">,</span>
+    <span class="ss">dom_id: </span><span class="s1">'#livesearch_user_dom'</span><span class="p">,</span>
+    <span class="ss">loading_css: </span><span class="s1">'#livesearch_user_loading'</span><span class="p">,</span>
+    <span class="ss">onInitSearch: </span><span class="n">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="s2">"user init:"</span> <span class="o">+</span> <span class="n">this</span><span class="p">.</span><span class="nf">url</span><span class="p">);</span>
+    <span class="p">},</span>
+    <span class="ss">onStartSearch: </span><span class="n">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="s2">"user start"</span><span class="p">);</span>
+    <span class="p">},</span>
+    <span class="ss">onFinishSearch: </span><span class="n">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="s2">"user finish"</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+  <span class="err">$</span><span class="p">(</span><span class="s1">'#livesearch_badge_input'</span><span class="p">).</span><span class="nf">hsearchbox</span><span class="p">({</span>
+    <span class="ss">url: </span><span class="err">$</span><span class="p">(</span><span class="s1">'#livesearch_badge_form'</span><span class="p">).</span><span class="nf">attr</span><span class="p">(</span><span class="s1">'action'</span><span class="p">),</span>
+    <span class="ss">param: </span><span class="s1">'search'</span><span class="p">,</span>
+    <span class="ss">dom_id: </span><span class="s1">'#livesearch_badge_dom'</span><span class="p">,</span>
+    <span class="ss">loading_css: </span><span class="s1">'#livesearch_badge_loading'</span><span class="p">,</span>
+    <span class="ss">onInitSearch: </span><span class="n">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="s2">"badge init:"</span> <span class="o">+</span> <span class="n">this</span><span class="p">.</span><span class="nf">url</span><span class="p">);</span>
+    <span class="p">},</span>
+    <span class="ss">onStartSearch: </span><span class="n">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="s2">"badge start"</span><span class="p">);</span>
+    <span class="p">},</span>
+    <span class="ss">onFinishSearch: </span><span class="n">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="s2">"badge finish"</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+<span class="p">});</span></code></pre></figure>
 
 <p>Phần config này các bạn có thể tìm hiểu thêm ở link <code class="highlighter-rouge">github</code> của plugin mình gửi ở trên.</p>
 
@@ -741,18 +741,18 @@ end
 
 <p><strong>app/views/searches/index.js.erb</strong></p>
 
-<pre><code class="language-Ruby">&lt;%= render "shared/search", items: @items %&gt;
-</code></pre>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Ruby</span>
+<span class="o">&lt;</span><span class="sx">%= render "shared/search", items: @items %&gt;</span></code></pre></figure>
 
 <p><strong>app/views/users/index.js.erb</strong></p>
 
-<pre><code class="language-Ruby">&lt;%= render "shared/search", items: @users %&gt;
-</code></pre>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Ruby</span>
+<span class="o">&lt;</span><span class="sx">%= render "shared/search", items: @users %&gt;</span></code></pre></figure>
 
 <p><strong>app/views/badges/index.js.erb</strong></p>
 
-<pre><code class="language-Ruby">&lt;%= render "shared/search", items: @badges %&gt;
-</code></pre>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Ruby</span>
+<span class="o">&lt;</span><span class="sx">%= render "shared/search", items: @badges %&gt;</span></code></pre></figure>
 
 <h3 id="35-bonus-thêm-css"><strong>3.5. Bonus thêm css</strong></h3>
 
@@ -760,54 +760,54 @@ end
 
 <p>**livesearch.scss</p>
 
-<pre><code class="language-SCSS">.scrollable-menu {
-  height: auto;
-  max-height: 500px;
-  overflow-x: hidden;
-}
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">SCSS</span>
+<span class="p">.</span><span class="nf">scrollable</span><span class="o">-</span><span class="n">menu</span> <span class="p">{</span>
+  <span class="ss">height: </span><span class="n">auto</span><span class="p">;</span>
+  <span class="n">max</span><span class="o">-</span><span class="ss">height: </span><span class="mi">500</span><span class="n">px</span><span class="p">;</span>
+  <span class="n">overflow</span><span class="o">-</span><span class="ss">x: </span><span class="n">hidden</span><span class="p">;</span>
+<span class="p">}</span>
 
-li.search-item {
-  height: 75px;
-  margin: 10px;
-  &amp;:hover {
-    background-color: #ecf0f1;
-    cursor:pointer;
-  }
-  a:link {
-   color:inherit;
-  }
-}
+<span class="n">li</span><span class="p">.</span><span class="nf">search</span><span class="o">-</span><span class="n">item</span> <span class="p">{</span>
+  <span class="ss">height: </span><span class="mi">75</span><span class="n">px</span><span class="p">;</span>
+  <span class="ss">margin: </span><span class="mi">10</span><span class="n">px</span><span class="p">;</span>
+  <span class="o">&amp;</span><span class="ss">:hover</span> <span class="p">{</span>
+    <span class="n">background</span><span class="o">-</span><span class="ss">color: </span><span class="c1">#ecf0f1;</span>
+    <span class="n">cursor</span><span class="ss">:pointer</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">a</span><span class="ss">:link</span> <span class="p">{</span>
+   <span class="n">color</span><span class="ss">:inherit</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 
-#livesearch {
-  a {
-    color: #66757f;
-  }
-}
+<span class="c1">#livesearch {</span>
+  <span class="n">a</span> <span class="p">{</span>
+    <span class="ss">color: </span><span class="c1">#66757f;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 
-.search-form {
-  display: table;
-  width: 500px;
-  background-color: #fff;
-  padding: 0;
-  .form-group {
-    display: table-cell;
-    width: 100%;
-    .form-control {
-      width: 100%;
-    }
-  }
-    button {
-      display: table-cell;
-      width: 70px;
-    }
-}
+<span class="p">.</span><span class="nf">search</span><span class="o">-</span><span class="n">form</span> <span class="p">{</span>
+  <span class="ss">display: </span><span class="n">table</span><span class="p">;</span>
+  <span class="ss">width: </span><span class="mi">500</span><span class="n">px</span><span class="p">;</span>
+  <span class="n">background</span><span class="o">-</span><span class="ss">color: </span><span class="c1">#fff;</span>
+  <span class="ss">padding: </span><span class="mi">0</span><span class="p">;</span>
+  <span class="p">.</span><span class="nf">form</span><span class="o">-</span><span class="n">group</span> <span class="p">{</span>
+    <span class="ss">display: </span><span class="n">table</span><span class="o">-</span><span class="n">cell</span><span class="p">;</span>
+    <span class="ss">width: </span><span class="mi">100</span><span class="o">%</span><span class="p">;</span>
+    <span class="p">.</span><span class="nf">form</span><span class="o">-</span><span class="n">control</span> <span class="p">{</span>
+      <span class="ss">width: </span><span class="mi">100</span><span class="o">%</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+    <span class="n">button</span> <span class="p">{</span>
+      <span class="ss">display: </span><span class="n">table</span><span class="o">-</span><span class="n">cell</span><span class="p">;</span>
+      <span class="ss">width: </span><span class="mi">70</span><span class="n">px</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-.dropdown-menu {
-  padding: 0;
-  border: none;
-  width: 100%;
-}
-</code></pre>
+<span class="p">.</span><span class="nf">dropdown</span><span class="o">-</span><span class="n">menu</span> <span class="p">{</span>
+  <span class="ss">padding: </span><span class="mi">0</span><span class="p">;</span>
+  <span class="ss">border: </span><span class="n">none</span><span class="p">;</span>
+  <span class="ss">width: </span><span class="mi">100</span><span class="o">%</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
 
 <p>Vậy là xong. Chúng ta đã có bộ 3 khung tìm kiếm ngon lành rồi (chuckle)</p>
 
@@ -823,6 +823,7 @@ li.search-item {
     </div>
   </div>
 </article>
+
 
 
     </div>
