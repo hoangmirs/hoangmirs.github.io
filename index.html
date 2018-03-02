@@ -1,35 +1,149 @@
----
-layout: default
-pagination:
-  enabled: true
-  collection: posts
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Mirs's page - Mirs's page</title>
+	<meta name="description" content="">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta property="og:image" content="">
+	<link rel="shortcut icon" href="/assets/img/favicon/favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" href="/assets/img/favicon/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicon/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/assets/img/favicon/apple-touch-icon-114x114.png">
+	<!-- Chrome, Firefox OS and Opera -->
+	<meta name="theme-color" content="#2d2a2a">
+	<!-- Windows Phone -->
+	<meta name="msapplication-navbutton-color" content="#2d2a2a">
+	<!-- iOS Safari -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="#2d2a2a">
 
-{% for post in paginator.posts %}
+	<link href="https://fonts.googleapis.com/css?family=Finger+Paint|PT+Sans:400,700" rel="stylesheet">
+	<link rel="stylesheet" href="/assets/fonts/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/assets/css/main.css">
+	
+		<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+	
+		<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+	
+</head>
+
+<body>
+
+  <aside class="sidebar">
+
+  <div class="sidebar-container">
+    <div class="sidebar-logo">
+      <a href="/" class="logo">Mirs</a>
+    </div>
+
+    <menu class="sidebar-menu">
+      <li class="menu-items"><a class="menu-links" href="/">Home</a></li>
+      <li class="menu-items"><a class="menu-links" href="/notes/">Notes</a></li>
+      <li class="menu-items"><a class="menu-links" href="/about/">About</a></li>
+      <li class="menu-items"><a class="menu-links" href="/contact/">Contact</a></li>
+    </menu>
+
+    <div class="sidebar-social">
+      <li class="social-items"><a target="_blank" href="https://www.facebook.com/hoangmirs" class="social-links"><i class="social-icons fa fa-facebook" aria-hidden="true"></i></a></li>
+      <li class="social-items"><a target="_blank" href="https://twitter.com/hoangmirs" class="social-links"><i class="social-icons fa fa-twitter" aria-hidden="true"></i></a></li>
+      <li class="social-items"><a target="_blank" href="https://plus.google.com/+HoàngMirs" class="social-links"><i class="social-icons fa fa-google-plus" aria-hidden="true"></i></a></li>
+      <li class="social-items"><a target="_blank" href="https://github.com/hoangmirs" class="social-links"><i class="social-icons fa fa-github" aria-hidden="true"></i></a></li>
+    </div>
+
+  </div>
+</aside>
+
+
+  <main role="main">
+    <div class="content">
+      
 <article class="main-article">
   <div class="wrap-content">
     <header class="header-article">
-      <h2 class="title-article"><a href="{{post.url | prepend: site.baseurl}}">{{post.title}}</a></h2>
-      <div class="post-date"><span>{{post.date | date: '%Y, %b %d'}}</span></div>
+      <h2 class="title-article"><a href="/zagreb-city/">Zagreb city</a></h2>
+      <div class="post-date"><span>2017, Mar 29</span></div>
     </header>
-    {% if post.img %}
-       <img class="post-image" src={{ "/assets/img/" | prepend: site.baseurl | append: post.img }} alt="{{post.title}}">
-    {% endif %}
-    <p>{{post.description}} <a class="more" href="{{post.url | prepend: site.baseurl}}">(Read more...)</a></p>
+    
+       <img class="post-image" src=/assets/img/zagreb_city.jpg alt="Zagreb city">
+    
+    <p>Cras ac ex sit amet leo rhoncus elementum eget eget eros. Curabitur venenatis lacus eget tempus consequat. Duis feugiat vehicula bibendum. Aliquam imperdiet tortor in diam viverra scelerisque. Vestibulum erat odio, rutrum nec volutpat et, mattis id diam. <a class="more" href="/zagreb-city/">(Read more...)</a></p>
   </div>
 </article>
-{% endfor %}
+
+<article class="main-article">
+  <div class="wrap-content">
+    <header class="header-article">
+      <h2 class="title-article"><a href="/the-white-house/">Wooden house</a></h2>
+      <div class="post-date"><span>2017, Mar 29</span></div>
+    </header>
+    
+       <img class="post-image" src=/assets/img/wooden_house.jpg alt="Wooden house">
+    
+    <p>Phasellus tincidunt pulvinar ante, pretium pellentesque urna mollis id. Donec convallis ut elit at aliquet. Suspendisse potenti. <a class="more" href="/the-white-house/">(Read more...)</a></p>
+  </div>
+</article>
+
+<article class="main-article">
+  <div class="wrap-content">
+    <header class="header-article">
+      <h2 class="title-article"><a href="/china-tiger-leaping-gorge/">China - tiger leaping gorge</a></h2>
+      <div class="post-date"><span>2017, Mar 29</span></div>
+    </header>
+    
+       <img class="post-image" src=/assets/img/china_tiger_leaping_gorge.jpg alt="China - tiger leaping gorge">
+    
+    <p>Curabitur vulputate enim at metus malesuada, in iaculis nisl tincidunt. Mauris dapibus ut ante ornare ullamcorper. Vivamus ultrices erat lorem. Phasellus pretium nisl ac elit porttitor, id condimentum velit aliquam. <a class="more" href="/china-tiger-leaping-gorge/">(Read more...)</a></p>
+  </div>
+</article>
+
+<article class="main-article">
+  <div class="wrap-content">
+    <header class="header-article">
+      <h2 class="title-article"><a href="/welcome-to-jekyll/">Welcome to Jekyll!</a></h2>
+      <div class="post-date"><span>2017, Mar 25</span></div>
+    </header>
+    
+    <p>You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. <a class="more" href="/welcome-to-jekyll/">(Read more...)</a></p>
+  </div>
+</article>
+
+<article class="main-article">
+  <div class="wrap-content">
+    <header class="header-article">
+      <h2 class="title-article"><a href="/simple-live-search/">Tạo livesearch đơn giản trên Rails sử dụng ransack, JavaScript</a></h2>
+      <div class="post-date"><span>2016, Oct 22</span></div>
+    </header>
+    
+       <img class="post-image" src=/assets/img/posts/live-search/search-form.png alt="Tạo livesearch đơn giản trên Rails sử dụng ransack, JavaScript">
+    
+    <p>Hiện tại hầu như trang web nào cũng có một khung tìm kiếm để tìm các thông tin từ nó. Và chắc hẳn nhiều bạn vừa mới tìm hiểu về web không biết nên bắt đầu từ đâu để làm ra một khung search như thế đúng không? <a class="more" href="/simple-live-search/">(Read more...)</a></p>
+  </div>
+</article>
+
 
 <div class="pagination">
-  {% if paginator.previous_page %}
-    <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}" class="previous"><i class="fa fa-chevron-left" aria-hidden="true"></i> Previous</a>
-  {% else %}
+  
     <span class="previous"><i class="fa fa-chevron-left" aria-hidden="true"></i> Previous</span>
-  {% endif %}
-  <span class="page_number ">{{ paginator.page }}/{{ paginator.total_pages }}</span>
-  {% if paginator.next_page %}
-    <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}" class="next">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
-  {% else %}
+  
+  <span class="page_number ">1/1</span>
+  
     <span class="next ">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></span>
-  {% endif %}
+  
 </div>
+
+    </div>
+  </main>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-114940904-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-114940904-1');
+</script>
+
+</body>
+</html>

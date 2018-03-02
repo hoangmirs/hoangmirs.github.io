@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Tạo livesearch đơn giản trên Rails sử dụng ransack, JavaScript - Mirs's page</title>
+	<meta name="description" content="Hiện tại hầu như trang web nào cũng có một khung tìm kiếm để tìm các thông tin từ nó. Và chắc hẳn nhiều bạn vừa mới tìm hiểu về web không biết nên bắt đầu từ đâu để làm ra một khung search như thế đúng không?">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta property="og:image" content="">
+	<link rel="shortcut icon" href="/assets/img/favicon/favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" href="/assets/img/favicon/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicon/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/assets/img/favicon/apple-touch-icon-114x114.png">
+	<!-- Chrome, Firefox OS and Opera -->
+	<meta name="theme-color" content="#2d2a2a">
+	<!-- Windows Phone -->
+	<meta name="msapplication-navbutton-color" content="#2d2a2a">
+	<!-- iOS Safari -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="#2d2a2a">
+
+	<link href="https://fonts.googleapis.com/css?family=Finger+Paint|PT+Sans:400,700" rel="stylesheet">
+	<link rel="stylesheet" href="/assets/fonts/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/assets/css/main.css">
+	
+		<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+	
+		<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+	
+</head>
+
+<body>
+
+  <aside class="sidebar">
+
+  <div class="sidebar-container">
+    <div class="sidebar-logo">
+      <a href="/" class="logo">Mirs</a>
+    </div>
+
+    <menu class="sidebar-menu">
+      <li class="menu-items"><a class="menu-links" href="/">Home</a></li>
+      <li class="menu-items"><a class="menu-links" href="/notes/">Notes</a></li>
+      <li class="menu-items"><a class="menu-links" href="/about/">About</a></li>
+      <li class="menu-items"><a class="menu-links" href="/contact/">Contact</a></li>
+    </menu>
+
+    <div class="sidebar-social">
+      <li class="social-items"><a target="_blank" href="https://www.facebook.com/hoangmirs" class="social-links"><i class="social-icons fa fa-facebook" aria-hidden="true"></i></a></li>
+      <li class="social-items"><a target="_blank" href="https://twitter.com/hoangmirs" class="social-links"><i class="social-icons fa fa-twitter" aria-hidden="true"></i></a></li>
+      <li class="social-items"><a target="_blank" href="https://plus.google.com/+HoàngMirs" class="social-links"><i class="social-icons fa fa-google-plus" aria-hidden="true"></i></a></li>
+      <li class="social-items"><a target="_blank" href="https://github.com/hoangmirs" class="social-links"><i class="social-icons fa fa-github" aria-hidden="true"></i></a></li>
+    </div>
+
+  </div>
+</aside>
+
+
+  <main role="main">
+    <div class="content">
+      
+<article class="page-article">
+  <div class="wrap-content">
+    <header class="page-header">
+      <h1 class="page-title">Tạo livesearch đơn giản trên Rails sử dụng ransack, JavaScript</h1>
+      <div class="page-date"><span>2016, Oct 22</span></div>
+    </header>
+    <div class="page-content">
+      
+      <img class="page-img" src=/assets/img/posts/live-search/search-form.png alt="Tạo livesearch đơn giản trên Rails sử dụng ransack, JavaScript">
+      
+      <h2 id="phần-1-giới-thiệu"><strong>Phần 1. Giới thiệu</strong></h2>
+
+<p>Hiện tại hầu như trang web nào cũng có một khung tìm kiếm để tìm các thông tin từ nó. Và chắc hẳn nhiều bạn vừa mới tìm hiểu về web không biết nên bắt đầu từ đâu để làm ra một khung search như thế đúng không?</p>
+
+<p>Trong bài này mình sẽ hướng dẫn các bạn tạo một khung search đơn giản bằng Rails và Jquery.</p>
+
+<p>Giao diện sẽ được trình bày như sau:</p>
+
+<p>Giao diện khung search
+<img src="/uploads/61548f66-2649-4997-8abb-7d7a08c9ea5f.png" alt="Screen Shot 2016-10-22 at 8.00.58 PM.png" /></p>
+
+<p>Giao diện khung search lúc hiển thị kết quả
+<img src="/uploads/e4a79183-2c1d-4cde-9290-ef9ec3792921.png" alt="Screen Shot 2016-10-22 at 8.00.36 PM.png" /></p>
+
+<p>Nào chúng ta bắt đầu thôi.</p>
+
+<h2 id="phần-2-chuẩn-bị"><strong>Phần 2. Chuẩn bị</strong></h2>
+
+<h3 id="21-tạo-một-ứng-dụng-rails-mới"><strong>2.1. Tạo một ứng dụng Rails mới</strong></h3>
+
+<p>Cái này thì chắc ai cũng làm được nhỉ :D</p>
+
+<h3 id="22-thêm-các-gem-để-hỗ-trợ-việc-cài-đặt"><strong>2.2. Thêm các gem để hỗ trợ việc cài đặt</strong></h3>
+
+<pre><code class="language-Ruby">gem "bootstrap-sass"
+gem "font-awesome-rails"
+// Để tạo các biểu thức search nhanh hơn
+gem "ransack"
+// Tạo dữ liệu ảo để test
+gem "faker"
+</code></pre>
+
+<h3 id="23-thêm-search-plugin"><strong>2.3. Thêm Search plugin</strong></h3>
+
+<p>Các bạn hãy copy nội dung dưới đây và tạo ra file “searchbox.js” hoặc tên gì cũng được trong folder “app/assets/javascripts/”</p>
+
+<pre><code class="language-JavaScript">// Author: Ryan Heath
+// http://rpheath.com
+// Mirs edited
+
+(function($) {
+  function HSearchBox(options){
+    var defaults = {
+      url: '/search',
+      param: 'query',
+      dom_id: '#livesearch_results',
+      delay: 250,
+      minChars: 2,
+      loading_css: '#livesearch_loading',
+      del_id: '#livesearch_del',
+      form_id: '#livesearch_form',
+      dataType: 'text',
+      onInitSearch: function(){},
+      onStartSearch: function(){},
+      onFinishSearch: function(){}u
+    }
+
+    this.settings = $.extend({}, defaults, options || {})
+
+    this.loading = function() {
+      $(this.settings.loading_css).show()
+    }
+
+    this.idle = function() {
+      $(this.settings.loading_css).hide()
+    }
+
+    this.start = function() {
+      this.loading()
+      this.settings.onStartSearch()
+    }
+
+    this.stop = function() {
+      this.idle()
+      this.settings.onFinishSearch()
+    }
+
+    this.kill = function() {
+      $(this.settings.dom_id).fadeOut(50)
+      $(this.settings.dom_id).html('')
+      $(this.settings.del_id).fadeOut(100)
+    }
+
+    this.reset = function() {
+      $(this.settings.dom_id).html('')
+      $(this.settings.dom_id).fadeOut(50)
+      $(this.settings.form_id).val('')
+      $(this.settings.del_id).fadeOut(100)
+    }
+
+    this.resetTimer = function(timer) {
+      if (timer) clearTimeout(timer)
+    }
+
+    this.process = function(terms) {
+      var currentSearchBox = this
+      if (/\S/.test(terms)) {
+        $.ajax({
+          type: 'GET',
+          dataType : currentSearchBox.settings.dataType,
+          url: currentSearchBox.settings.url,
+          data: {
+            search: terms.trim()
+          },
+          complete: function(data) {
+            $(currentSearchBox.settings.del_id).fadeIn(50)
+            $(currentSearchBox.settings.dom_id).html(data.responseText)
+            if (!$(currentSearchBox.settings.dom_id).is(':empty')) {
+              $(currentSearchBox.settings.dom_id).fadeIn(100)
+            }
+            currentSearchBox.stop()
+          }
+        })
+        return false
+      } else {
+        currentSearchBox.kill()
+      }
+    }
+  }
+
+  $.fn.hsearchbox = function(configs) {
+    var hsearchbox = new HSearchBox(configs)
+    hsearchbox.settings.onInitSearch()
+    hsearchbox.idle()
+
+    return this.each(function() {
+      var $input = $(this)
+      $input
+        .keyup(function() {
+          if ($input.val() != this.previousValue) {
+            if (/\S/.test($input.val().trim()) &amp;&amp; $input.val().trim().length &gt; hsearchbox.settings.minChars) {
+              hsearchbox.resetTimer(this.timer)
+              this.timer = setTimeout(function() {
+                hsearchbox.start()
+                hsearchbox.process($input.val())
+              }, hsearchbox.settings.delay)
+            } else {
+              hsearchbox.kill()
+            }
+            this.previousValue = $input.val()
+          }
+        })
+    })
+  }
+})(jQuery)
+</code></pre>
+
+<p>Các bạn có thể vào link sau để xem hướng dẫn cách dùng plugin này.
+<code class="highlighter-rouge">https://github.com/hoangmirs/searchbox/</code></p>
+
+<p>Đây là một plugin của Ryan Heath và mình lấy về tùy biến thêm các phần cho phù hợp.</p>
+
+<h2 id="phần-3-chiến-thôi"><strong>Phần 3. Chiến thôi</strong></h2>
+
+<h3 id="31-tạo-ra-các-model-để-test"><strong>3.1. Tạo ra các model để test</strong></h3>
+
+<p>Mình tạo 2 models để test, đó là User và Badge tương ứng như dưới.</p>
+
+<p><strong>User</strong></p>
+
+<pre><code class="language-Ruby">class CreateUsers &lt; ActiveRecord::Migration[5.0]
+  def change
+    create_table :users do |t|
+      t.string :username
+      t.string :fullname
+      t.string :email
+      t.string :avatar
+
+      t.timestamps
+    end
+  end
+end
+</code></pre>
+
+<p><strong>Badge</strong></p>
+
+<pre><code class="language-Ruby">class CreateBadges &lt; ActiveRecord::Migration[5.0]
+  def change
+    create_table :badges do |t|
+      t.string :name
+      t.string :image
+      t.references :user, foreign_key: true
+
+      t.timestamps
+    end
+  end
+end
+</code></pre>
+
+<p>Sau đó chạy Seed như sau để có dữ liệu test:</p>
+
+<p><strong>Seed</strong></p>
+
+<pre><code class="language-Ruby">puts "Creating users...."
+10.times do |n|
+  fullname = Faker::Name.name
+  username = Faker::Internet.user_name
+  email = Faker::Internet.email
+  avatar = "/assets/user-#{n%6 + 1}"
+  User.create! fullname: fullname, username: username, email: email, avatar: avatar
+end
+puts "Created users!"
+puts "Creating badges...."
+10.times do |n|
+  name = Faker::Book.title
+  image = "/assets/user-#{n%6 + 1}"
+  user_id = rand(User.count) + 1
+  Badge.create! name: name, image: image, user_id: user_id
+end
+puts "Created badges!"
+</code></pre>
+
+<p>Mình có để sẵn 6 cái hình ở trong thư mục <code class="highlighter-rouge">app/assets/images</code> nên có phần này:
+<code class="highlighter-rouge">avatar = "/assets/user-#{n%6 + 1}"</code>.
+Các bạn muốn thì cứ lên mạng kiếm 6 cái hình đặt tên dạng user-num cũng ok.</p>
+
+<h3 id="32-tạo-controllers"><strong>3.2. Tạo controllers</strong></h3>
+
+<p>Mình sẽ làm 3 khung tìm kiếm, khung đầu tiên sẽ tìm cả Users lẫn Badges, khung thứ nhìn tìm Users và khung thứ ba tìm Badges.
+File <code class="highlighter-rouge">routes.rb</code> của mình sẽ có dạng như sau:</p>
+
+<pre><code class="language-Ruby">Rails.application.routes.draw do
+  get "search(/:search)", to: "searches#index", as: :search
+  resources :badges
+  resources :users
+end
+</code></pre>
+
+<p>Tạo <code class="highlighter-rouge">SearchesController</code> để tìm cả Users lẫn Badges
+<strong>SeachesController</strong></p>
+
+<pre><code class="language-Ruby">class SearchesController &lt; ApplicationController
+  def index
+    q = params[:search]
+    users = User.search(fullname_or_username_or_email_cont: q).result
+    badges = Badge.search(name_or_user_fullname_cont: q).result
+      .includes(:user)
+    @items = users + badges
+    respond_to do |format|
+      format.js
+      format.html
+    end
+  end
+end
+</code></pre>
+
+<p>Ở đây mình dùng các pattern search của gem Ransack nên có khó hiểu thì tìm hiểu gem này nhé. Mình cũng trả về chung 1 mảng dữ liệu là @items, sau đó sẽ xử lí dưới view sau.</p>
+
+<p><strong>UsersController</strong></p>
+
+<pre><code class="language-Ruby">class UsersController &lt; ApplicationController
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+
+  # GET /users
+  # GET /users.json
+  def index
+    q = params[:search]
+    if q
+      @users = User.search(fullname_or_username_or_email_cont: q).result
+    else
+      @users = User.all
+    end
+    respond_to do |format|
+      format.js
+      format.html
+    end
+  end
+
+  # GET /users/1
+  # GET /users/1.json
+  def show
+  end
+
+  # GET /users/new
+  def new
+    @user = User.new
+  end
+
+  # GET /users/1/edit
+  def edit
+  end
+
+  # POST /users
+  # POST /users.json
+  def create
+    @user = User.new(user_params)
+
+    respond_to do |format|
+      if @user.save
+        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.json { render :show, status: :created, location: @user }
+      else
+        format.html { render :new }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PATCH/PUT /users/1
+  # PATCH/PUT /users/1.json
+  def update
+    respond_to do |format|
+      if @user.update(user_params)
+        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.json { render :show, status: :ok, location: @user }
+      else
+        format.html { render :edit }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /users/1
+  # DELETE /users/1.json
+  def destroy
+    @user.destroy
+    respond_to do |format|
+      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_user
+      @user = User.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def user_params
+      params.require(:user).permit(:username, :fullname, :email, :avatar)
+    end
+end
+</code></pre>
+
+<p>Cái này mình generate scaffold nên nó nhìu như vậy. Tương tự badges cũng thế. Hai cái này mình chỉ sửa lại action index thôi :D</p>
+
+<p><strong>BadgesController</strong></p>
+
+<pre><code class="language-Ruby">class BadgesController &lt; ApplicationController
+  before_action :set_badge, only: [:show, :edit, :update, :destroy]
+
+  # GET /badges
+  # GET /badges.json
+  def index
+    q = params[:search]
+    if q
+      @badges = Badge.search(name_or_user_fullname_cont: q).result
+    else
+      @badges = Badge.all
+    end
+    respond_to do |format|
+      format.js
+      format.html
+    end
+  end
+
+  # GET /badges/1
+  # GET /badges/1.json
+  def show
+  end
+
+  # GET /badges/new
+  def new
+    @badge = Badge.new
+  end
+
+  # GET /badges/1/edit
+  def edit
+  end
+
+  # POST /badges
+  # POST /badges.json
+  def create
+    @badge = Badge.new(badge_params)
+
+    respond_to do |format|
+      if @badge.save
+        format.html { redirect_to @badge, notice: 'Badge was successfully created.' }
+        format.json { render :show, status: :created, location: @badge }
+      else
+        format.html { render :new }
+        format.json { render json: @badge.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PATCH/PUT /badges/1
+  # PATCH/PUT /badges/1.json
+  def update
+    respond_to do |format|
+      if @badge.update(badge_params)
+        format.html { redirect_to @badge, notice: 'Badge was successfully updated.' }
+        format.json { render :show, status: :ok, location: @badge }
+      else
+        format.html { render :edit }
+        format.json { render json: @badge.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /badges/1
+  # DELETE /badges/1.json
+  def destroy
+    @badge.destroy
+    respond_to do |format|
+      format.html { redirect_to badges_url, notice: 'Badge was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_badge
+      @badge = Badge.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def badge_params
+      params.require(:badge).permit(:name, :image, :user_id)
+    end
+end
+</code></pre>
+
+<h3 id="33-tạo-views"><strong>3.3. Tạo views</strong></h3>
+
+<p>Ở file _header.html.erb mình làm 3 thanh navbar:</p>
+
+<pre><code class="language-HTML">&lt;nav class="navbar navbar-default"&gt;
+  &lt;div class="row"&gt;
+    &lt;!-- Brand and toggle get grouped for better mobile display --&gt;
+    &lt;div class="col-md-2"&gt;
+      &lt;a class="navbar-brand" href="#"&gt;All&lt;/a&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Collect the nav links, forms, and other content for toggling --&gt;
+    &lt;div class="col-md-8"&gt;
+      &lt;%= form_tag search_path, method: :get,
+        class: "navbar-form search-form", id: "livesearch_form" do %&gt;
+        &lt;div class="form-group dropdown"&gt;
+          &lt;%= text_field_tag :search, params[:search],
+            class: "form-control dropdown-toggle",
+            placeholder: "Search...",
+            "data-toggle": "dropdown", "aria-hidden": :true,
+            autocomplete: :off, required: true, id: "livesearch_input" %&gt;
+          &lt;ul class="dropdown-menu"&gt;
+            &lt;div id="livesearch_dom"&gt;&lt;/div&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+        &lt;%= button_tag type: :submit, class: "btn btn-default" do %&gt;
+          &lt;i class="fa fa-search"&gt;&lt;/i&gt;
+        &lt;% end %&gt;
+      &lt;% end %&gt;
+    &lt;/div&gt;&lt;!-- /.navbar-collapse --&gt;
+  &lt;/div&gt;&lt;!-- /.container-fluid --&gt;
+&lt;/nav&gt;
+
+&lt;nav class="navbar navbar-default"&gt;
+  &lt;div class="row"&gt;
+    &lt;!-- Brand and toggle get grouped for better mobile display --&gt;
+    &lt;div class="col-md-2"&gt;
+      &lt;a class="navbar-brand" href="#"&gt;Users&lt;/a&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Collect the nav links, forms, and other content for toggling --&gt;
+    &lt;div class="col-md-8"&gt;
+      &lt;%= form_tag users_path, method: :get,
+        class: "navbar-form search-form", id: "livesearch_user_form" do %&gt;
+        &lt;div class="form-group dropdown"&gt;
+          &lt;%= text_field_tag :search, params[:search],
+            class: "form-control dropdown-toggle",
+            placeholder: "Search users...",
+            "data-toggle": "dropdown", "aria-hidden": :true,
+            autocomplete: :off, required: true, id: "livesearch_user_input" %&gt;
+          &lt;ul class="dropdown-menu"&gt;
+            &lt;div id="livesearch_user_dom"&gt;&lt;/div&gt;
+            &lt;div id="livesearch_user_loading"&gt;&lt;/div&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+        &lt;%= button_tag type: :submit, class: "btn btn-default" do %&gt;
+          &lt;i class="fa fa-search"&gt;&lt;/i&gt;
+        &lt;% end %&gt;
+      &lt;% end %&gt;
+    &lt;/div&gt;&lt;!-- /.navbar-collapse --&gt;
+  &lt;/div&gt;&lt;!-- /.container-fluid --&gt;
+&lt;/nav&gt;
+
+&lt;nav class="navbar navbar-default"&gt;
+  &lt;div class="row"&gt;
+    &lt;!-- Brand and toggle get grouped for better mobile display --&gt;
+    &lt;div class="col-md-2"&gt;
+      &lt;a class="navbar-brand" href="#"&gt;Badges&lt;/a&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Collect the nav links, forms, and other content for toggling --&gt;
+    &lt;div class="col-md-8"&gt;
+      &lt;%= form_tag badges_path, method: :get,
+        class: "navbar-form search-form", id: "livesearch_badge_form" do %&gt;
+        &lt;div class="form-group dropdown"&gt;
+          &lt;%= text_field_tag :search, params[:search],
+            class: "form-control dropdown-toggle",
+            placeholder: "Search badges...",
+            "data-toggle": "dropdown", "aria-hidden": :true,
+            autocomplete: :off, required: true, id: "livesearch_badge_input" %&gt;
+          &lt;ul class="dropdown-menu"&gt;
+            &lt;div id="livesearch_badge_dom"&gt;&lt;/div&gt;
+            &lt;div id="livesearch_badge_loading"&gt;&lt;/div&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+        &lt;%= button_tag type: :submit, class: "btn btn-default" do %&gt;
+          &lt;i class="fa fa-search"&gt;&lt;/i&gt;
+        &lt;% end %&gt;
+      &lt;% end %&gt;
+    &lt;/div&gt;&lt;!-- /.navbar-collapse --&gt;
+  &lt;/div&gt;&lt;!-- /.container-fluid --&gt;
+&lt;/nav&gt;
+</code></pre>
+
+<p>Ban đầu chỉ định thêm một cái thôi, nhưng nhác quá nên quất cả 3 cái trong này luôn.</p>
+
+<p>Bây giờ ình sẽ làm view kết quả để hiển thị:</p>
+
+<p>Mình tạo folder <code class="highlighter-rouge">app/views/shared</code> và tạo file <code class="highlighter-rouge">_search.html.erb</code>. Mục đích là định nghĩa cái view kết quả khi tìm kiếm ở khung tìm kiếm cả Users và Badges.</p>
+
+<pre><code class="language-HTML">&lt;% if items.blank? %&gt;
+  &lt;li&gt;
+    &lt;%= link_to search_path(params[:search]),
+      class: "btn btn-default btn-block" do %&gt;
+      &lt;%= "No results for #{params[:search]}" %&gt;
+    &lt;% end %&gt;
+  &lt;/li&gt;
+&lt;% else %&gt;
+  &lt;div class="scrollable-menu"&gt;
+    &lt;% items.each do |item| %&gt;
+      &lt;% if item.is_a? User %&gt;
+        &lt;%= render "users/search_item", user: item %&gt;
+      &lt;% elsif item.is_a? Badge %&gt;
+        &lt;%= render "badges/search_item", badge: item %&gt;
+      &lt;% end %&gt;
+    &lt;% end %&gt;
+  &lt;/div&gt;
+  &lt;li class="divider"&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;%= link_to search_path(params[:search]),
+      class: "btn btn-default btn-block" do %&gt;
+      &lt;%= "See more #{items.size} for #{params[:search]}" %&gt;
+    &lt;% end %&gt;
+  &lt;/li&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>Như khi nãy mình có nói là mình truyền về @items, thì trong này mình sẽ check xem từng từng item đó là gì và hiển thị partial tương ứng.</p>
+
+<p>Tiếp theo sẽ đến tạo partial.</p>
+
+<p>Mình tạo thêm partial <code class="highlighter-rouge">search_item</code> cho users bằng cách tạo file <code class="highlighter-rouge">_search_item.html.erb</code> trong folder <code class="highlighter-rouge">app/views/users</code>
+<strong>_search_item.html.erb</strong></p>
+
+<pre><code class="language-HTML">&lt;li class="search-item"&gt;
+  &lt;%= link_to user do %&gt;
+    &lt;div class="col-md-3"&gt;
+      &lt;%= image_tag user.avatar, class: "img-responsive" %&gt;
+    &lt;/div&gt;
+    &lt;div class="col-md-9"&gt;
+      &lt;div class="row"&gt;
+        &lt;strong&gt;&lt;%= user.fullname %&gt;&lt;/strong&gt;
+      &lt;/div&gt;
+      &lt;div class="row"&gt;
+        &lt;div class="col-md-8"&gt;
+          &lt;%= user.email %&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="row"&gt;
+        &lt;i&gt;&lt;%= User.name %&gt;&lt;/i&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="clearfix"&gt;&lt;/div&gt;
+  &lt;% end %&gt;
+&lt;/li&gt;
+</code></pre>
+
+<p>Tương tự cho Badges, tạo file <code class="highlighter-rouge">_search_item.html.erb</code> trong folder <code class="highlighter-rouge">app/views/badges</code></p>
+
+<p><strong>_search_item.html.erb</strong></p>
+
+<pre><code class="language-HTML">&lt;li class="search-item"&gt;
+  &lt;%= link_to badge do %&gt;
+    &lt;div class="col-xs-12 col-sm-3 col-md-3"&gt;
+      &lt;%= image_tag badge.image, class: "img-responsive" %&gt;
+    &lt;/div&gt;
+    &lt;div class="col-xs-12 col-sm-9 col-md-9"&gt;
+      &lt;div class="row"&gt;
+        &lt;strong&gt;&lt;%= badge.name %&gt;&lt;/strong&gt;
+      &lt;/div&gt;
+      &lt;div class="row"&gt;
+        &lt;div class="col-md-8"&gt;
+          &lt;%= badge.user.fullname %&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="row"&gt;
+        &lt;i&gt;&lt;%= Badge.name %&gt;&lt;/i&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="clearfix"&gt;&lt;/div&gt;
+  &lt;% end %&gt;
+&lt;/li&gt;
+</code></pre>
+
+<p>Vậy là xong cho view. Tiếp theo chúng ta sẽ thêm vài đoạn JS để nó chạy nào.</p>
+
+<h3 id="34-tạo-các-đoạn-javascript"><strong>3.4. Tạo các đoạn JavaScript</strong></h3>
+
+<h4 id="341-khởi-tạo-searchbox"><strong>3.4.1. Khởi tạo searchbox</strong></h4>
+
+<p>Chúng ta sẽ khởi tạo các searchbox bằng cách tạo 1 file js ở <code class="highlighter-rouge">app/assets/javascripts</code> và đặt tên tùy ý. Ở đây mình đặt là <code class="highlighter-rouge">header.js</code> vì mấy khung search của mình để ở header :))</p>
+
+<p><strong>header.js</strong></p>
+
+<pre><code class="language-JavaScript">$(document).ready(function() {
+  $('#livesearch_input').hsearchbox({
+    url: $('#livesearch_form').attr('action'),
+    param: 'search',
+    dom_id: '#livesearch_dom',
+    loading_css: '#livesearch_loading',
+    onInitSearch: function() {
+      console.log("search init:" + this.url);
+    },
+    onStartSearch: function() {
+      console.log("search start");
+    },
+    onFinishSearch: function() {
+      console.log("search finish");
+    }
+  });
+  $('#livesearch_user_input').hsearchbox({
+    url: $('#livesearch_user_form').attr('action'),
+    param: 'search',
+    dom_id: '#livesearch_user_dom',
+    loading_css: '#livesearch_user_loading',
+    onInitSearch: function() {
+      console.log("user init:" + this.url);
+    },
+    onStartSearch: function() {
+      console.log("user start");
+    },
+    onFinishSearch: function() {
+      console.log("user finish");
+    }
+  });
+  $('#livesearch_badge_input').hsearchbox({
+    url: $('#livesearch_badge_form').attr('action'),
+    param: 'search',
+    dom_id: '#livesearch_badge_dom',
+    loading_css: '#livesearch_badge_loading',
+    onInitSearch: function() {
+      console.log("badge init:" + this.url);
+    },
+    onStartSearch: function() {
+      console.log("badge start");
+    },
+    onFinishSearch: function() {
+      console.log("badge finish");
+    }
+  });
+});
+</code></pre>
+
+<p>Phần config này các bạn có thể tìm hiểu thêm ở link <code class="highlighter-rouge">github</code> của plugin mình gửi ở trên.</p>
+
+<h4 id="342-các-file-js-để-render-kết-quả"><strong>3.4.2. Các file JS để render kết quả</strong></h4>
+
+<p>Mình có 3 files JS tất cả, tương ứng với 3 action <code class="highlighter-rouge">index</code> của 3 controllers phía trên. Những files này để trả về kết quả cho plugin và hiển thị ra.</p>
+
+<p><strong>app/views/searches/index.js.erb</strong></p>
+
+<pre><code class="language-Ruby">&lt;%= render "shared/search", items: @items %&gt;
+</code></pre>
+
+<p><strong>app/views/users/index.js.erb</strong></p>
+
+<pre><code class="language-Ruby">&lt;%= render "shared/search", items: @users %&gt;
+</code></pre>
+
+<p><strong>app/views/badges/index.js.erb</strong></p>
+
+<pre><code class="language-Ruby">&lt;%= render "shared/search", items: @badges %&gt;
+</code></pre>
+
+<h3 id="35-bonus-thêm-css"><strong>3.5. Bonus thêm css</strong></h3>
+
+<p>Mình có tạo file <code class="highlighter-rouge">app/assets/stylesheets/livesearch.scss</code> để custom cái khung search cho dễ nhìn tí. Các bạn có thể copy về để thử.</p>
+
+<p>**livesearch.scss</p>
+
+<pre><code class="language-SCSS">.scrollable-menu {
+  height: auto;
+  max-height: 500px;
+  overflow-x: hidden;
+}
+
+li.search-item {
+  height: 75px;
+  margin: 10px;
+  &amp;:hover {
+    background-color: #ecf0f1;
+    cursor:pointer;
+  }
+  a:link {
+   color:inherit;
+  }
+}
+
+#livesearch {
+  a {
+    color: #66757f;
+  }
+}
+
+.search-form {
+  display: table;
+  width: 500px;
+  background-color: #fff;
+  padding: 0;
+  .form-group {
+    display: table-cell;
+    width: 100%;
+    .form-control {
+      width: 100%;
+    }
+  }
+    button {
+      display: table-cell;
+      width: 70px;
+    }
+}
+
+.dropdown-menu {
+  padding: 0;
+  border: none;
+  width: 100%;
+}
+</code></pre>
+
+<p>Vậy là xong. Chúng ta đã có bộ 3 khung tìm kiếm ngon lành rồi (chuckle)</p>
+
+<h2 id="phần-3-kết-luận"><strong>Phần 3. Kết luận</strong></h2>
+
+<p>Qua bài chia sẻ bên trên, mình mong các bạn sẽ có thể tự tùy biến được cho mình một khung tìm kiếm đơn giản. Nếu thấy bài viết bổ ích, các bạn hãy ủng hộ cho mình nhé.
+ Dưới đây mình note lại link <code class="highlighter-rouge">github</code> của cái plugin và example mình làm mẫu. Các bạn có thể lấy về vọc thử:
+ <code class="highlighter-rouge">https://github.com/hoangmirs/searchbox/</code>
+ <code class="highlighter-rouge">https://github.com/hoangmirs/hsearchbox-example</code></p>
+
+<p>Nếu thấy hay thì nhớ <strong>Star</strong> cho mình. Cảm ơn các bạn.</p>
+
+    </div>
+    
+<div id="disqus_thread"></div>
+<script>
+  var disqus_config = function () {
+    this.page.url = 'https://hoangmirs.github.io/simple-live-search/';
+    this.page.identifier = 'https://hoangmirs.github.io/simple-live-search/';
+  };
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://hoang-mirs.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+    <!-- Load Facebook SDK for JavaScript -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-comments" data-href="https://hoangmirs.github.io/simple-live-search/" data-include-parent="true" data-width="100%" data-numposts="5"></div>
+
+  </div>
+</article>
+
+
+    </div>
+  </main>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-114940904-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-114940904-1');
+</script>
+
+</body>
+</html>
