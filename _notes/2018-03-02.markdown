@@ -1,6 +1,6 @@
 ---
 layout: post
-place:  "Danang, Vietnam"
+place:  Danang, Vietnam
 date:   2018-03-01 17:00:00 +0700
 description: Hiện tại hầu như trang web nào cũng có một khung tìm kiếm để tìm các thông tin từ nó. Và chắc hẳn nhiều bạn vừa mới tìm hiểu về web không biết nên bắt đầu từ đâu để làm ra một khung search như thế đúng không?
 ---
